@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<h1>Regístrate</h1>
+<form>
+  <label for="tipo-usuario">Seleccione su tipo de usuario:</label>
+  <select id="tipo-usuario" name="tipo-usuario" (change)="mostrarFormulario()">
+    <option value="medico">Médico</option>
+    <option value="paciente">Paciente</option>
+  </select>
+
+  <div id="datos-personales" style="display:none;">
+    <h2>Datos personales</h2>
+
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre">
+
+    <label for="apellidos">Apellidos:</label>
+    <input type="text" id="apellidos" name="apellidos">
+
+    <label for="dni">DNI:</label>
+    <input type="text" id="dni" name="dni">
+
+    <label for="num-seguridad-social">Número de la seguridad social:</label>
+    <input type="text" id="num-seguridad-social" name="num-seguridad-social">
+
+    <label for="fecha-nacimiento">Fecha de nacimiento:</label>
+    <input type="date" id="fecha-nacimiento" name="fecha-nacimiento">
+
+    <label for="genero">Género:</label>
+    <input type="radio" id="genero-hombre" name="genero" value="hombre">
+    <label for="genero-hombre">Hombre</label>
+    <input type="radio" id="genero-mujer" name="genero" value="mujer">
+    <label for="genero-mujer">Mujer</label>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email">
+
+    <label for="telefono">Teléfono:</label>
+    <input type="tel" id="telefono" name="telefono">
+
+    <label for="altura">Altura (cm):</label>
+    <input type="number" id="altura" name="altura">
+
+    <label for="peso">Peso (kg):</label>
+    <input type="number" id="peso" name="peso">
+
+    <label for="idiomas">Idiomas:</label>
+    <select id="idiomas" name="idiomas" multiple>
+      <option value="espanol">Español</option>
+      <option value="ingles">Inglés</option>
+      <option value="frances">Francés</option>
+      <option value="aleman">Alemán</option>
+    </select>
+  </div>
+
+  <div id="historial-clinico" style="display:none;">
+    <h2>Historial clínico</h2>
+
+    <label for="alergias">Alergias:</label>
+    <input type="text" id="alergias" name="alergias">
+
+    <label for="enfermedades">Enfermedades:</label>
+    <select id="enfermedades" name="enfermedades" multiple>
+      <option value="diabetes">Diabetes</option>
+      <option value="hipertension">Hipertensión</option>
+      <option value="asma">Asma</option>
+      <option value="artritis">Artritis</option>
+      <option value="otras">Otras</option>
+    </select>
+  </div>
+</form>
+</html>
+
