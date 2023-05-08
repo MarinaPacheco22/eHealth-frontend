@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-main',
@@ -7,17 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
-  showInitialButtons: boolean = true;
-  showRegisterForm: boolean = false;
-
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
   register() {
-    this.showInitialButtons = false;
-    this.showRegisterForm = true;
+    this.router.navigate(['/register']);
   }
 
   login() {

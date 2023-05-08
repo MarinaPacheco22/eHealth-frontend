@@ -2,3 +2,7 @@ label, input {
   display: block;
   margin-bottom: 10px;
 }
+
+.container {
+  margin-top: 100px;
+}

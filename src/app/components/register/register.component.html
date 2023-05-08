@@ -1,73 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
-<h1>Regístrate</h1>
-<form>
-  <label for="tipo-usuario">Seleccione su tipo de usuario:</label>
-  <select id="tipo-usuario" name="tipo-usuario" (change)="mostrarFormulario()">
-    <option value="medico">Médico</option>
-    <option value="paciente">Paciente</option>
-  </select>
+<head>
+  <meta charset="UTF-8">
+  <title>Regístrate</title>
+</head>
+<body>
+<div class="container">
+  <h1>Regístrate</h1>
+  <form>
+    <div class="form-group">
+      <label for="tipo-usuario">Seleccione su tipo de usuario:</label>
+      <select id="tipo-usuario" name="tipo-usuario" class="form-control" (change)="mostrarFormulario()">
+        <option value="default" id="default" selected>-- Seleccione una opción --</option>
+        <option value="medico">Médico</option>
+        <option value="paciente">Paciente</option>
+      </select>
+    </div>
 
-  <div id="datos-personales" style="display:none;">
-    <h2>Datos personales</h2>
+    <div id="datos-personales-comunes">
+      <h2>Datos personales</h2>
 
-    <label for="nombre">Nombre:</label>
-    <input type="text" id="nombre" name="nombre">
+      <div class="form-group">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" class="form-control" required>
+      </div>
 
-    <label for="apellidos">Apellidos:</label>
-    <input type="text" id="apellidos" name="apellidos">
+      <div class="form-group">
+        <label for="apellidos">Apellidos:</label>
+        <input type="text" id="apellidos" name="apellidos" class="form-control" required>
+      </div>
 
-    <label for="dni">DNI:</label>
-    <input type="text" id="dni" name="dni">
+      <div class="form-group">
+        <label for="dni">DNI:</label>
+        <input type="text" id="dni" name="dni" class="form-control" required>
+      </div>
 
-    <label for="num-seguridad-social">Número de la seguridad social:</label>
-    <input type="text" id="num-seguridad-social" name="num-seguridad-social">
+      <div class="form-group">
+        <label for="fecha-nacimiento">Fecha de nacimiento:</label>
+        <input type="date" id="fecha-nacimiento" name="fecha-nacimiento" class="form-control" required>
+      </div>
 
-    <label for="fecha-nacimiento">Fecha de nacimiento:</label>
-    <input type="date" id="fecha-nacimiento" name="fecha-nacimiento">
+      <div class="form-group">
+        <label>Género:</label>
+        <div class="form-check">
+          <input type="radio" id="genero-hombre" name="genero" value="hombre" class="form-check-input" required>
+          <label for="genero-hombre" class="form-check-label">Hombre</label>
+        </div>
+        <div class="form-check">
+          <input type="radio" id="genero-mujer" name="genero" value="mujer" class="form-check-input" required>
+          <label for="genero-mujer" class="form-check-label">Mujer</label>
+        </div>
+      </div>
 
-    <label for="genero">Género:</label>
-    <input type="radio" id="genero-hombre" name="genero" value="hombre">
-    <label for="genero-hombre">Hombre</label>
-    <input type="radio" id="genero-mujer" name="genero" value="mujer">
-    <label for="genero-mujer">Mujer</label>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" class="form-control" required>
+      </div>
 
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email">
+      <div class="form-group">
+        <label for="telefono">Teléfono:</label>
+        <input type="tel" id="telefono" name="telefono" class="form-control" required>
+      </div>
+    </div>
 
-    <label for="telefono">Teléfono:</label>
-    <input type="tel" id="telefono" name="telefono">
+    <div id="datos-personales-paciente" style="display:none;">
 
-    <label for="altura">Altura (cm):</label>
-    <input type="number" id="altura" name="altura">
+      <div class="form-group">
+        <label for="num-seguridad-social">Número de la seguridad social:</label>
+        <input type="text" id="num-seguridad-social" name="num-seguridad-social" class="form-control" required>
+      </div>
 
-    <label for="peso">Peso (kg):</label>
-    <input type="number" id="peso" name="peso">
+      <div class="form-group">
+        <label for="altura">Altura (cm):</label>
+        <input type="number" class="form-control" id="altura" name="altura">
+      </div>
 
-    <label for="idiomas">Idiomas:</label>
-    <select id="idiomas" name="idiomas" multiple>
-      <option value="espanol">Español</option>
-      <option value="ingles">Inglés</option>
-      <option value="frances">Francés</option>
-      <option value="aleman">Alemán</option>
-    </select>
+      <div class="form-group">
+        <label for="peso">Peso (kg):</label>
+        <input type="number" class="form-control" id="peso" name="peso">
+      </div>
+
+      <h2>Historial clínico</h2>
+
+      <div class="form-group">
+        <label for="alergias">Alergias:</label>
+        <input type="text" class="form-control" id="alergias" name="alergias" placeholder="Escriba las alergias separadas por coma.">
+      </div>
+
+      <div class="form-group">
+        <label>Enfermedades:</label>
+        <input type="text" class="form-control" id="enfermedad-input" placeholder="Escriba las enfermedades separadas por coma.">
+      </div>
+
+    </div>
+
+    <div id="datos-personales-medico" style="display:none;">
+
+      <div class="form-group">
+        <label for="num-seguridad-social">Número de colegiado:</label>
+        <input type="text" id="num-colegiado" name="num-colegiado" class="form-control" required>
+      </div>
+
+      <div class="form-group">
+        <label for="especialidad">Especialidad:</label>
+        <input type="text" id="especialidad" name="especialidad" class="form-control" required>
+      </div>
+
+    </div>
+
+  </form>
+  <div class="button-container" id="send-button" style="display:none;">
+    <button class="btn btn-primary" id="sendBtn" (click)="send()">Registrarme</button>
   </div>
-
-  <div id="historial-clinico" style="display:none;">
-    <h2>Historial clínico</h2>
-
-    <label for="alergias">Alergias:</label>
-    <input type="text" id="alergias" name="alergias">
-
-    <label for="enfermedades">Enfermedades:</label>
-    <select id="enfermedades" name="enfermedades" multiple>
-      <option value="diabetes">Diabetes</option>
-      <option value="hipertension">Hipertensión</option>
-      <option value="asma">Asma</option>
-      <option value="artritis">Artritis</option>
-      <option value="otras">Otras</option>
-    </select>
+  <div class="button-container" id="back-button">
+    <button class="btn btn-secondary" (click)="back()">Volver</button>
   </div>
-</form>
+</div>
+</body>
 </html>
 
