@@ -18,6 +18,6 @@ export class MainComponent implements OnInit {
   }
 
   login() {
-
+    this.router.navigate(['/base']);
   }
 }

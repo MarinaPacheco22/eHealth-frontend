@@ -21,14 +21,14 @@ export class AppComponent {
   }
 
   async ngOnInit():Promise<void> {
-    KeycloakService.login({
-      urlStr: this.configService.keycloakUrl,
-      realmStr: this.configService.realm,
-      clientIdStr: this.configService.clientId
-    }).then(async () => {
-      await this.setIsAdmin();
-      this.isLogged = true;
-    });
+    // KeycloakService.login({
+    //   urlStr: this.configService.keycloakUrl,
+    //   realmStr: this.configService.realm,
+    //   clientIdStr: this.configService.clientId
+    // }).then(async () => {
+    //   await this.setIsAdmin();
+    //   this.isLogged = true;
+    // });
   }
 
   async setIsAdmin() {

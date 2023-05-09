@@ -8,18 +8,26 @@ import { RegisterComponent } from './components/register/register.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {RouterOutlet} from "@angular/router";
 import {AppRoutingModule} from "./app-routing.module";
+import { AdminComponent } from './components/admin/admin.component';
+import {HttpClientModule} from "@angular/common/http";
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { BaseComponent } from './components/base/base.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
-    RegisterComponent
+    RegisterComponent,
+    AdminComponent,
+    NavbarComponent,
+    BaseComponent
   ],
   imports: [
     BrowserModule,
     NgbModule,
     RouterOutlet,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [
     KeycloakService

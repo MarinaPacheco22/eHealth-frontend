@@ -7,7 +7,7 @@
 <body>
 <div class="container">
   <h1>Regístrate</h1>
-  <form>
+  <form id="form">
     <div class="form-group">
       <label for="tipo-usuario">Seleccione su tipo de usuario:</label>
       <select id="tipo-usuario" name="tipo-usuario" class="form-control" (change)="mostrarFormulario()">
@@ -53,13 +53,18 @@
       </div>
 
       <div class="form-group">
+        <label for="telefono">Teléfono:</label>
+        <input type="tel" id="telefono" name="telefono" class="form-control" required>
+      </div>
+
+      <div class="form-group">
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" class="form-control" required>
       </div>
 
       <div class="form-group">
-        <label for="telefono">Teléfono:</label>
-        <input type="tel" id="telefono" name="telefono" class="form-control" required>
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" minlength="8" placeholder="Mínimo 8 caracteres" required>
       </div>
     </div>
 
@@ -97,7 +102,7 @@
     <div id="datos-personales-medico" style="display:none;">
 
       <div class="form-group">
-        <label for="num-seguridad-social">Número de colegiado:</label>
+        <label for="num-colegiado">Número de colegiado:</label>
         <input type="text" id="num-colegiado" name="num-colegiado" class="form-control" required>
       </div>
 

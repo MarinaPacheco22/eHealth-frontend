@@ -1,0 +1,36 @@
+.navbar {
+  margin-bottom: 10px;
+  margin-left: 0;
+  background-image: url("src/assets/logo.jpg");
+  font-family: 'Raleway', sans-serif;
+}
+
+.navbar-brand {
+  padding: 70px;
+}
+
+.navbar-nav {
+  margin-left: 200px;
+  margin-right: auto;
+  margin-top: 10px;
+}
+
+.nav-link {
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+}
+
+.nav-link:hover {
+  color: #555;
+}
+
+.navbar-nav li {
+  margin-right: 50px;
+
+}
+
+.navbar-nav li:last-child {
+  margin-left: 650px;
+  margin-right: 0;
+}
