@@ -12,6 +12,7 @@ import { AdminComponent } from './components/admin/admin.component';
 import {HttpClientModule} from "@angular/common/http";
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { BaseComponent } from './components/base/base.component';
+import { PacientesComponent } from './components/pacientes/pacientes.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { BaseComponent } from './components/base/base.component';
     RegisterComponent,
     AdminComponent,
     NavbarComponent,
-    BaseComponent
+    BaseComponent,
+    PacientesComponent
   ],
   imports: [
     BrowserModule,

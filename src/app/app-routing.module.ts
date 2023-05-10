@@ -4,6 +4,7 @@ import {MainComponent} from "./components/main/main.component";
 import {RegisterComponent} from "./components/register/register.component";
 import {AdminComponent} from "./components/admin/admin.component";
 import {BaseComponent} from "./components/base/base.component";
+import {PacientesComponent} from "./components/pacientes/pacientes.component";
 
 const routes: Routes = [
   {path: '', redirectTo: 'main', pathMatch: 'full'},
@@ -11,6 +12,7 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'admin', component: AdminComponent},
   {path: 'base', component: BaseComponent},
+  {path: 'pacientes', component: PacientesComponent},
 ];
 
 @NgModule({

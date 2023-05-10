@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {KeycloakService} from "./services/keycloak.service";
 import jwtDecode from 'jwt-decode';
 import {ConfigEnvService} from "./config-env.service";
+import {NavigationEnd, Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -13,11 +14,18 @@ export class AppComponent {
   token: any;
   isLogged: boolean = false;
   isAdmin: boolean = false;
+  currentRoute: string;
 
   constructor(
     protected keycloak: KeycloakService,
-    protected configService: ConfigEnvService
+    protected configService: ConfigEnvService,
+    private router: Router
     ) {
+      this.router.events.subscribe((event) => {
+        if (event instanceof NavigationEnd) {
+          this.currentRoute = event.url;
+        }
+      });
   }
 
   async ngOnInit():Promise<void> {
