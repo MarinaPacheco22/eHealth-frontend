@@ -3,26 +3,20 @@ import {ConfigEnvService} from "../config-env.service";
 import {HttpClient} from "@angular/common/http";
 import {Paciente} from "../components/model/paciente.model";
 import {Observable} from "rxjs";
+import {HistorialClinico} from "../components/model/historial-clinico.model";
 
 @Injectable({
   providedIn: 'root'
 })
-export class PacientesService {
+export class HistorialClinicoService {
 
   API_ENDPOINT = this.configService.apiEndpoint;
 
   constructor(private http: HttpClient, protected configService: ConfigEnvService) {
   }
 
-  getPacientesByMedico(idMedico: number) {
-    return this.http.get<any>(this.API_ENDPOINT + "/paciente/by-medico/" + idMedico, {
-      params: undefined,
-      observe: 'response'
-    });
-  }
-
-  createPaciente(paciente: Paciente): Observable<any> {
-    return this.http.post<any>(this.API_ENDPOINT + '/paciente/', paciente, {
+  createHistorialClinico(historial: HistorialClinico): Observable<any> {
+    return this.http.post<any>(this.API_ENDPOINT + '/historial-clinico/', historial, {
       params: undefined,
       observe: 'response'
     });

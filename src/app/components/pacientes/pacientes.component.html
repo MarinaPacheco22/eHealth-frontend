@@ -1,24 +1,27 @@
-<table id="pacientes-table" class="table table-striped">
-  <thead>
-  <tr>
-    <th>Nombre</th>
-    <th>Apellidos</th>
-    <th>Fecha de nacimiento</th>
-    <th>Altura</th>
-    <th>Peso</th>
-    <th>Historial clínico</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let paciente of pacientesAsignados">
-    <td>{{ paciente.nombre }}</td>
-    <td>{{ paciente.apellidos }}</td>
-    <td>{{ paciente.fecha_nacimiento }}</td>
-    <td>{{ paciente.altura }}</td>
-    <td>{{ paciente.peso }}</td>
-    <td>
-      <!-- Aquí puedes agregar contenido adicional para el historial clínico del paciente -->
-    </td>
-  </tr>
-  </tbody>
-</table>
+<div id="table-container">
+  <table id="pacientes-table" class="table table-striped">
+    <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Apellidos</th>
+      <th>Fecha de nacimiento</th>
+      <th>Altura</th>
+      <th>Peso</th>
+      <th>Historial clínico</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let paciente of pacientesAsignados">
+      <td>{{ paciente.nombre }}</td>
+      <td>{{ paciente.apellidos }}</td>
+      <td>{{ paciente.fecha_nacimiento }}</td>
+      <td>{{ paciente.altura }}</td>
+      <td>{{ paciente.peso }}</td>
+      <td>
+        <!-- Aquí puedes agregar contenido adicional para el historial clínico del paciente -->
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>
