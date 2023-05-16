@@ -1,4 +1,4 @@
-import {Paciente} from "./paciente.model";
+
 
 export class HistorialClinico {
 
@@ -6,10 +6,9 @@ export class HistorialClinico {
     enfermedadesDiagnosticadas ?: [],
     alergias ?: [],
     intervenciones ?: [],
-    pruebas ?: [],
     medicacionActual ?: [],
     pruebasMedicas ?: [],
-    paciente ?: Paciente
+    pacienteId ?: number
     ) {
   }
 }

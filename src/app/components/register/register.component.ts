@@ -3,7 +3,6 @@ import {Location} from '@angular/common';
 import {Router} from "@angular/router";
 import {Paciente} from "../model/paciente.model";
 import {Medico} from "../model/medico.model";
-import {HistorialClinico} from "../model/historial-clinico.model";
 import {PacientesService} from "../../services/pacientes.service";
 import {MedicosService} from 'src/app/services/medicos.service';
 import {HistorialClinicoService} from 'src/app/services/historial-clinico.service';
@@ -19,8 +18,7 @@ export class RegisterComponent implements OnInit {
     private location: Location,
     private router: Router,
     private pacientesService: PacientesService,
-    private medicosService: MedicosService,
-    private historialClinicoService: HistorialClinicoService
+    private medicosService: MedicosService
   ) {
   }
 
@@ -96,49 +94,30 @@ export class RegisterComponent implements OnInit {
     if (tipoUsuarioInput.value === 'paciente') {
       const camposPaciente = this.obtenerCamposPaciente();
 
-      this.medicosService.getMedicoWithLessAsignations().subscribe(
-        (medicoAsignado) => {
-          const newPaciente: Paciente = {
-            ...camposComunes,
-            ...camposPaciente,
-            medicoAsignado: medicoAsignado.body,
-          };
-          console.log(newPaciente);
-          this.pacientesService.createPaciente(newPaciente).subscribe(
-            () => {
-              const newHistorial: HistorialClinico = {
-                ...camposPaciente,
-                paciente: newPaciente,
-              };
-              this.historialClinicoService.createHistorialClinico(newHistorial).subscribe(
-                () => {
-                  // Éxito en la creación del historial clínico
-                },
-                (error) => {
-                  // Error al crear el historial clínico
-                  console.error('Error al crear el historial clínico:', error);
-                }
-              );
-            },
-            (error) => {
-              // Error al crear el paciente
-              console.error('Error al crear el paciente:', error);
-            }
-          );
+      const newPaciente: Paciente = {
+        id: null,
+        ...camposComunes,
+        ...camposPaciente
+      };
+
+      this.pacientesService.createPaciente(newPaciente).subscribe(
+        (pacienteCreado) => {
+          console.log("paciente creado: " + pacienteCreado.toString());
         },
         (error) => {
-          // Error al obtener el médico asignado
-          console.error('Error al obtener el médico asignado:', error);
+          // Error al crear el paciente
+          console.error('Error al crear el paciente:', error);
         }
       );
+
     } else {
       const numColegiado = numColegiadoInput.value;
       const especialidad = especialidadInput.value;
 
       const newMedico: Medico = {
-        camposComunes,
+        ...camposComunes,
         especialidad: especialidad,
-        numero_de_colegiado: numColegiado,
+        numeroDeColegiado: numColegiado,
       };
 
       this.medicosService.createMedico(newMedico).subscribe(
@@ -174,12 +153,9 @@ export class RegisterComponent implements OnInit {
     const apellidosInput = document.getElementById("apellidos") as HTMLInputElement;
     const dniInput = document.getElementById("dni") as HTMLInputElement;
     const fechaNacimientoInput = document.getElementById("fecha-nacimiento") as HTMLInputElement;
-    const numSSInput = document.getElementById("num-seguridad-social") as HTMLInputElement;
     const telefonoInput = document.getElementById("telefono") as HTMLInputElement;
     const passwordInput = document.getElementById("password") as HTMLInputElement;
     const emailInput = document.getElementById("email") as HTMLInputElement;
-
-    const fechaActual = new Date();
 
     const fechaNacimiento = new Date(fechaNacimientoInput.value);
     const ano = fechaNacimiento.getFullYear();
@@ -195,7 +171,6 @@ export class RegisterComponent implements OnInit {
       apellidos: apellidosInput.value,
       dni: dniInput.value,
       fechaNacimiento: fechaFormateada,
-      numSegSocial: numSSInput.value,
       telefono: parseInt(telefonoInput.value),
       password: password,
       email: emailInput.value
@@ -209,15 +184,13 @@ export class RegisterComponent implements OnInit {
     const alergiasInput = document.getElementById("alergias") as HTMLInputElement;
     const intervencionesInput = document.getElementById("intervenciones") as HTMLInputElement;
 
-    const camposPaciente = {
+    return {
       altura: parseInt(alturaInput.value),
       peso: parseInt(pesoInput.value),
-      enfermedades: enfermedadesInput.value !== '' ? enfermedadesInput.value.split(",") : [],
+      enfermedadesDiagnosticadas: enfermedadesInput.value !== '' ? enfermedadesInput.value.split(",") : [],
       alergias: alergiasInput.value !== '' ? alergiasInput.value.split(",") : [],
       intervenciones: intervencionesInput.value !== '' ? intervencionesInput.value.split(",") : []
     };
-
-    return camposPaciente;
   }
 
 

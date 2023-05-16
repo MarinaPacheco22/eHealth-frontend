@@ -2,6 +2,7 @@
 export class Medico {
 
   constructor(
+    id ?: number,
     nombre ?: string,
     apellidos ?: string,
     dni ?: string,

@@ -7,7 +7,7 @@
       <th>Fecha de nacimiento</th>
       <th>Altura</th>
       <th>Peso</th>
-      <th>Historial clínico</th>
+      <th>Historial Clinico</th>
     </tr>
     </thead>
     <tbody>
@@ -18,7 +18,10 @@
       <td>{{ paciente.altura }}</td>
       <td>{{ paciente.peso }}</td>
       <td>
-        <!-- Aquí puedes agregar contenido adicional para el historial clínico del paciente -->
+        <button class="btn btn-primary"><i class="bi bi-paperclip" (click)="mostrarHistorial()"></i></button>
+      </td>
+      <td>
+        <button (click)="mostrarHistorial()"></button>
       </td>
     </tr>
     </tbody>

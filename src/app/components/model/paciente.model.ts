@@ -1,9 +1,8 @@
-import {HistorialClinico} from "./historial-clinico.model";
-import {Medico} from "./medico.model";
 
 export class Paciente {
 
   constructor(
+    id ?: number,
     nombre ?: string,
     apellidos ?: string,
     dni ?: string,
@@ -14,8 +13,8 @@ export class Paciente {
     telefono ?: number,
     contrasena ?: string,
     email ?: string,
-    historialClinico ?: HistorialClinico,
-    medicoAsignado ?: Medico
+    historialClinicoId ?: Number,
+    medicoAsignadoId ?: Number
     ) {
   }
 }

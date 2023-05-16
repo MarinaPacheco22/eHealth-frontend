@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {PacientesService} from "../../services/pacientes.service";
 import {catchError, throwError} from "rxjs";
+import {HistorialClinicoService} from "../../services/historial-clinico.service";
 
 @Component({
   selector: 'app-pacientes',
@@ -34,4 +35,7 @@ export class PacientesComponent implements OnInit {
     this.getPacientesAsignados();
   }
 
+  mostrarHistorial() {
+    // this.historialClinicoService.getHistorialesByPaciente()
+  }
 }
