@@ -1,12 +1,4 @@
-.table thead th {
-  background-color: #007bff;
-  color: #fff;
-}
-
-.table-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh; /* Ajusta la altura según tus necesidades */
+.column-width {
+  width: 30px;
 }
 

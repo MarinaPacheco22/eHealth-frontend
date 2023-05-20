@@ -1,4 +1,4 @@
-label, input, button, select {
+label, input {
   display: block;
   margin-bottom: 10px;
 }

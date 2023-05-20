@@ -1,0 +1,33 @@
+<ng-container *ngIf="showNavBar">
+  <app-navbar></app-navbar>
+</ng-container>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Inicia Sesión</title>
+</head>
+<body>
+<div class="container">
+  <h1>Inicia Sesión</h1>
+  <form id="form">
+      <div class="form-group">
+        <label for="username">Email:</label>
+        <input type="email" id="username" name="email" class="form-control" placeholder="Ingrese su email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" minlength="8" class="form-control" placeholder="Ingrese su contraseña" required>
+      </div>
+  </form>
+  <div class="button-container" id="send-button">
+    <button class="btn btn-primary" id="sendBtn" (click)="login()">Iniciar sesión</button>
+  </div>
+  <div class="button-container" id="back-button">
+    <button class="btn btn-secondary" (click)="back()">Volver</button>
+  </div>
+</div>
+</body>
+</html>

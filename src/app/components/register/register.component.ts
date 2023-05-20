@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {Location} from '@angular/common';
 import {Router} from "@angular/router";
-import {Paciente} from "../model/paciente.model";
-import {Medico} from "../model/medico.model";
+import {Paciente} from "../../model/paciente.model";
+import {Medico} from "../../model/medico.model";
 import {PacientesService} from "../../services/pacientes.service";
 import {MedicosService} from 'src/app/services/medicos.service';
-import {HistorialClinicoService} from 'src/app/services/historial-clinico.service';
+import {RolService} from "../../services/rol.service";
 
 @Component({
   selector: 'app-register',
@@ -14,16 +14,40 @@ import {HistorialClinicoService} from 'src/app/services/historial-clinico.servic
 })
 export class RegisterComponent implements OnInit {
 
+  showNavBar: boolean = false;
+  especialidades: string[] = [
+    'Alergología',
+    'Cardiología',
+    'Dermatología',
+    'Endocrinología',
+    'Gastroenterología',
+    'Hematología',
+    'Infectología',
+    'Medicina familiar',
+    'Neumología',
+    'Neurología',
+    'Oftalmología',
+    'Oncología',
+    'Ortopedia',
+    'Otorrinolaringología',
+    'Pediatría',
+    'Psicología',
+    'Psiquiatría',
+    'Radiología',
+    'Reumatología',
+    'Urología'
+  ];
+
   constructor(
     private location: Location,
     private router: Router,
     private pacientesService: PacientesService,
-    private medicosService: MedicosService
+    private medicosService: MedicosService,
+    private rolService: RolService
   ) {
   }
 
   ngOnInit(): void {
-
   }
 
   mostrarFormulario() {
@@ -67,7 +91,11 @@ export class RegisterComponent implements OnInit {
     const emailInput = document.getElementById("email") as HTMLInputElement;
     const numSSInput = document.getElementById("num-seguridad-social") as HTMLInputElement;
     const numColegiadoInput = document.getElementById("num-colegiado") as HTMLInputElement;
-    const especialidadInput = document.getElementById("especialidad") as HTMLInputElement;
+    const especialidadSelect = document.getElementById("especialidad") as HTMLSelectElement;
+    const especialidadDefaultOption = especialidadSelect.querySelector("option[value='default-especialidad']");
+    if (especialidadDefaultOption) {
+      especialidadDefaultOption.remove();
+    }
 
     if (
       (tipoUsuarioInput.value !== 'paciente' && tipoUsuarioInput.value !== 'medico') ||
@@ -79,9 +107,13 @@ export class RegisterComponent implements OnInit {
       !telefonoInput.value ||
       !emailInput.value
     ) {
-      alert("Campos incompletos.");
+      const errorMessage = "Contraseña incorrecta.";
+      const errorElement = document.getElementById("error-message");
+      errorElement.textContent = errorMessage;
+      errorElement.style.color = "red";
+      //alert("Campos incompletos.");
       return;
-    } else if (tipoUsuarioInput.value === 'medico' && (!numColegiadoInput.value || !especialidadInput.value)) {
+    } else if (tipoUsuarioInput.value === 'medico' && (!numColegiadoInput.value || !especialidadSelect.value)) {
       alert("Campos incompletos.");
       return;
     } else if (tipoUsuarioInput.value === 'paciente' && !numSSInput.value) {
@@ -101,18 +133,24 @@ export class RegisterComponent implements OnInit {
       };
 
       this.pacientesService.createPaciente(newPaciente).subscribe(
-        (pacienteCreado) => {
-          console.log("paciente creado: " + pacienteCreado.toString());
+        (response) => {
+          console.log("Paciente creado con éxito.");
+          this.rolService.setUserType("paciente");
+          this.router.navigate(['/base']);
         },
         (error) => {
-          // Error al crear el paciente
-          console.error('Error al crear el paciente:', error);
+          if(error.status == 409) {
+            alert("Este email ya ha sido registrado.");
+          } else {
+            alert("Error inesperado.");
+            console.error('Error al crear el paciente:', error);
+          }
         }
       );
 
     } else {
       const numColegiado = numColegiadoInput.value;
-      const especialidad = especialidadInput.value;
+      const especialidad = especialidadSelect.value;
 
       const newMedico: Medico = {
         ...camposComunes,
@@ -122,17 +160,21 @@ export class RegisterComponent implements OnInit {
 
       this.medicosService.createMedico(newMedico).subscribe(
         () => {
-          // Éxito en la creación del médico
+          console.log("Medico creado con éxito.");
+          this.rolService.setUserType("medico");
+          alert("Se ha registrado correctamente. Le avisaremos a su correo electrónico cuando el administrador compruebe la información introducida y su cuenta sea activada.")
+          this.router.navigate(['/main']);
         },
         (error) => {
-          // Error al crear el médico
-          console.error('Error al crear el médico:', error);
+          if(error.status == 409) {
+            alert("Este email ya ha sido registrado.");
+          } else {
+            alert("Error inesperado.");
+            console.error('Error al crear el médico:', error);
+          }
         }
       );
     }
-
-
-    this.router.navigate(['/base']);
   }
 
   async generarHashPassword(password: string): Promise<string> {
@@ -180,6 +222,7 @@ export class RegisterComponent implements OnInit {
   obtenerCamposPaciente() {
     const alturaInput = document.getElementById("altura") as HTMLInputElement;
     const pesoInput = document.getElementById("peso") as HTMLInputElement;
+    const numSegSocialInput = document.getElementById("num-seguridad-social") as HTMLInputElement;
     const enfermedadesInput = document.getElementById("enfermedades") as HTMLInputElement;
     const alergiasInput = document.getElementById("alergias") as HTMLInputElement;
     const intervencionesInput = document.getElementById("intervenciones") as HTMLInputElement;
@@ -187,11 +230,11 @@ export class RegisterComponent implements OnInit {
     return {
       altura: parseInt(alturaInput.value),
       peso: parseInt(pesoInput.value),
+      numSegSocial: numSegSocialInput.value,
       enfermedadesDiagnosticadas: enfermedadesInput.value !== '' ? enfermedadesInput.value.split(",") : [],
       alergias: alergiasInput.value !== '' ? alergiasInput.value.split(",") : [],
       intervenciones: intervencionesInput.value !== '' ? intervencionesInput.value.split(",") : []
     };
   }
-
 
 }

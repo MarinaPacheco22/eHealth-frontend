@@ -1,30 +1,38 @@
+<head>
+  <title>Pacientes</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous" />
+</head>
+<ng-container *ngIf="showNavBar">
+  <app-navbar></app-navbar>
+</ng-container>
 <div id="table-container">
-  <table id="pacientes-table" class="table table-striped">
+  <table id="pacientes-table" class="table table-hover">
     <thead>
     <tr>
-      <th>Nombre</th>
-      <th>Apellidos</th>
-      <th>Fecha de nacimiento</th>
-      <th>Altura</th>
-      <th>Peso</th>
-      <th>Historial Clinico</th>
+      <th></th>
+      <th class="text-center">Nombre</th>
+      <th class="text-center">Apellidos</th>
+      <th class="text-center">Fecha de nacimiento</th>
+      <th class="text-center">Altura</th>
+      <th class="text-center">Peso</th>
+      <th class="text-center">Historial Clinico</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let paciente of pacientesAsignados">
-      <td>{{ paciente.nombre }}</td>
-      <td>{{ paciente.apellidos }}</td>
-      <td>{{ paciente.fecha_nacimiento }}</td>
-      <td>{{ paciente.altura }}</td>
-      <td>{{ paciente.peso }}</td>
-      <td>
-        <button class="btn btn-primary"><i class="bi bi-paperclip" (click)="mostrarHistorial()"></i></button>
+      <td></td>
+      <td class="text-center">{{ paciente.nombre }}</td>
+      <td class="text-center">{{ paciente.apellidos }}</td>
+      <td class="text-center">{{ paciente.fechaNacimiento }}</td>
+      <td class="text-center">{{ paciente.altura }} cm</td>
+      <td class="text-center">{{ paciente.peso }} kg</td>
+      <td class="text-center">
+        <button>
+          <i class="fas fa-paperclip" (click)="mostrarHistorial()"></i>
+        </button>
       </td>
-      <td>
-        <button (click)="mostrarHistorial()"></button>
-      </td>
+
     </tr>
     </tbody>
   </table>
-
 </div>

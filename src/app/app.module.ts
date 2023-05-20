@@ -13,6 +13,8 @@ import {HttpClientModule} from "@angular/common/http";
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { BaseComponent } from './components/base/base.component';
 import { PacientesComponent } from './components/pacientes/pacientes.component';
+import { LoginComponent } from './components/login/login.component';
+import { MedicosComponent } from './components/medicos/medicos.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { PacientesComponent } from './components/pacientes/pacientes.component';
     AdminComponent,
     NavbarComponent,
     BaseComponent,
-    PacientesComponent
+    PacientesComponent,
+    LoginComponent,
+    MedicosComponent
   ],
   imports: [
     BrowserModule,

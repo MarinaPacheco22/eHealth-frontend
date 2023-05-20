@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import {ConfigEnvService} from "../config-env.service";
 import {HttpClient} from "@angular/common/http";
-import {Paciente} from "../components/model/paciente.model";
 import {Observable} from "rxjs";
-import { Medico } from '../components/model/medico.model';
+import { Medico } from '../model/medico.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +14,22 @@ export class MedicosService {
   constructor(private http: HttpClient, protected configService: ConfigEnvService) {
   }
 
+  getAllMedicos() {
+    return this.http.get<any>(this.API_ENDPOINT + "/medico", {
+      params: undefined,
+      observe: 'response'
+    });
+  }
+
   getMedicoWithLessAsignations() {
     return this.http.get<any>(this.API_ENDPOINT + "/medico/less-asignations", {
+      params: undefined,
+      observe: 'response'
+    });
+  }
+
+  getMedicosByEmail(email: string) {
+    return this.http.get<any>(this.API_ENDPOINT + "/medico/by-email/" + email, {
       params: undefined,
       observe: 'response'
     });

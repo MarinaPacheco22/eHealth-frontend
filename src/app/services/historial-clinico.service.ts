@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import {ConfigEnvService} from "../config-env.service";
 import {HttpClient} from "@angular/common/http";
-import {Paciente} from "../components/model/paciente.model";
 import {Observable} from "rxjs";
-import {HistorialClinico} from "../components/model/historial-clinico.model";
+import {HistorialClinico} from "../model/historial-clinico.model";
 
 @Injectable({
   providedIn: 'root'
