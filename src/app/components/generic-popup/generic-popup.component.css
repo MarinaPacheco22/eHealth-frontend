@@ -1,0 +1,11 @@
+.popup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.popup-message {
+  font-size: 18px;
+  text-align: center;
+}

@@ -6,6 +6,8 @@ import {Medico} from "../../model/medico.model";
 import {PacientesService} from "../../services/pacientes.service";
 import {MedicosService} from 'src/app/services/medicos.service';
 import {RolService} from "../../services/rol.service";
+import {GenericPopupComponent} from "../generic-popup/generic-popup.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-register',
@@ -43,7 +45,8 @@ export class RegisterComponent implements OnInit {
     private router: Router,
     private pacientesService: PacientesService,
     private medicosService: MedicosService,
-    private rolService: RolService
+    private rolService: RolService,
+    private dialog: MatDialog
   ) {
   }
 
@@ -76,7 +79,7 @@ export class RegisterComponent implements OnInit {
   async send() {
     const passwordInput = document.getElementById("password") as HTMLInputElement;
     if (passwordInput.value && passwordInput.value.length < 8) {
-      alert("La contraseña debe tener al menos 8 caracteres.");
+      this.mostrarPopup("La contraseña debe tener al menos 8 caracteres.");
       return;
     }
 
@@ -107,17 +110,13 @@ export class RegisterComponent implements OnInit {
       !telefonoInput.value ||
       !emailInput.value
     ) {
-      const errorMessage = "Contraseña incorrecta.";
-      const errorElement = document.getElementById("error-message");
-      errorElement.textContent = errorMessage;
-      errorElement.style.color = "red";
-      //alert("Campos incompletos.");
+      this.mostrarPopup("Campos incompletos.");
       return;
     } else if (tipoUsuarioInput.value === 'medico' && (!numColegiadoInput.value || !especialidadSelect.value)) {
-      alert("Campos incompletos.");
+      this.mostrarPopup("Campos incompletos.");
       return;
     } else if (tipoUsuarioInput.value === 'paciente' && !numSSInput.value) {
-      alert("Campos incompletos.");
+      this.mostrarPopup("Campos incompletos.");
       return;
     }
 
@@ -133,16 +132,16 @@ export class RegisterComponent implements OnInit {
       };
 
       this.pacientesService.createPaciente(newPaciente).subscribe(
-        (response) => {
+        () => {
           console.log("Paciente creado con éxito.");
           this.rolService.setUserType("paciente");
           this.router.navigate(['/base']);
         },
         (error) => {
           if(error.status == 409) {
-            alert("Este email ya ha sido registrado.");
+            this.mostrarPopup("Este email ya ha sido registrado.");
           } else {
-            alert("Error inesperado.");
+            this.mostrarPopup("Error inesperado.");
             console.error('Error al crear el paciente:', error);
           }
         }
@@ -162,14 +161,14 @@ export class RegisterComponent implements OnInit {
         () => {
           console.log("Medico creado con éxito.");
           this.rolService.setUserType("medico");
-          alert("Se ha registrado correctamente. Le avisaremos a su correo electrónico cuando el administrador compruebe la información introducida y su cuenta sea activada.")
+          this.mostrarPopup("Se ha registrado correctamente. Le avisaremos a su correo electrónico cuando el administrador compruebe la información introducida y su cuenta sea activada.")
           this.router.navigate(['/main']);
         },
         (error) => {
           if(error.status == 409) {
-            alert("Este email ya ha sido registrado.");
+            this.mostrarPopup("Este email ya ha sido registrado.");
           } else {
-            alert("Error inesperado.");
+            this.mostrarPopup("Error inesperado.");
             console.error('Error al crear el médico:', error);
           }
         }
@@ -201,7 +200,7 @@ export class RegisterComponent implements OnInit {
 
     const fechaNacimiento = new Date(fechaNacimientoInput.value);
     const ano = fechaNacimiento.getFullYear();
-    const mes = fechaNacimiento.getMonth() + 1; // Los meses van de 0 a 11, por lo que se suma 1
+    const mes = fechaNacimiento.getMonth() + 1;
     const dia = fechaNacimiento.getDate();
 
     const fechaFormateada = `${ano}-${mes.toString().padStart(2, '0')}-${dia.toString().padStart(2, '0')}`;
@@ -235,6 +234,13 @@ export class RegisterComponent implements OnInit {
       alergias: alergiasInput.value !== '' ? alergiasInput.value.split(",") : [],
       intervenciones: intervencionesInput.value !== '' ? intervencionesInput.value.split(",") : []
     };
+  }
+
+  mostrarPopup(mensaje: string): void {
+    this.dialog.open(GenericPopupComponent, {
+      width: '300px',
+      data: { message: mensaje }
+    });
   }
 
 }

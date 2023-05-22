@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {PacientesService} from "../../services/pacientes.service";
 import {catchError, throwError} from "rxjs";
 import {RolService} from "../../services/rol.service";
+import {Router} from "@angular/router";
+import {MatDialog} from "@angular/material/dialog";
+import {HistorialClinicoPopupComponent} from "../historial-clinico-popup/historial-clinico-popup.component";
 
 @Component({
   selector: 'app-pacientes',
@@ -11,12 +14,14 @@ import {RolService} from "../../services/rol.service";
 export class PacientesComponent implements OnInit {
 
   public pacientesAsignados: any;
-  public medicoId: number = 5;
+  public medicoId: number = 8;
   showNavBar: boolean = true;
 
   constructor(
     private pacientesService: PacientesService,
-    private rolService: RolService
+    private rolService: RolService,
+    private router: Router,
+    private dialog: MatDialog
   ) {
   }
 
@@ -49,10 +54,13 @@ export class PacientesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.rolService.setUserType('admin');
     this.getPacientesAsignados();
   }
 
   mostrarHistorial() {
-    //this.historialClinicoService.getHistorialesByPaciente()
+    this.dialog.open(HistorialClinicoPopupComponent, {
+      panelClass: 'dialog-center'
+    });
   }
 }

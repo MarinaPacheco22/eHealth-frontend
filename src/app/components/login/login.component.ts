@@ -4,6 +4,8 @@ import {Router} from "@angular/router";
 import {MedicosService} from "../../services/medicos.service";
 import {catchError, switchMap, throwError} from "rxjs";
 import {RolService} from "../../services/rol.service";
+import {MatDialog} from "@angular/material/dialog";
+import {GenericPopupComponent} from "../generic-popup/generic-popup.component";
 
 @Component({
   selector: 'app-login',
@@ -18,7 +20,8 @@ export class LoginComponent implements OnInit {
   constructor(private pacientesService: PacientesService,
               private medicosService: MedicosService,
               private router: Router,
-              private rolService: RolService) {
+              private rolService: RolService,
+              private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -29,7 +32,7 @@ export class LoginComponent implements OnInit {
     const password = document.getElementById("password") as HTMLInputElement;
 
     if (!username.value || !password.value) {
-      alert("Campos incompletos.");
+      this.mostrarPopup("Campos incompletos.");
       return;
     } else {
       let isAdmin = await this.generarHashPassword(password.value) == '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918' && username.value == "admin";
@@ -47,7 +50,7 @@ export class LoginComponent implements OnInit {
               return this.router.navigate(['/base']);
             } else {
               console.log("Contraseña incorrecta.");
-              alert("Contraseña incorrecta.");
+              this.mostrarPopup("Contraseña incorrecta.");
               return throwError('Contraseña incorrecta.');
             }
           }),
@@ -61,14 +64,14 @@ export class LoginComponent implements OnInit {
                   return this.router.navigate(['/base']);
                 } else {
                   console.log("Contraseña incorrecta.");
-                  alert("Contraseña incorrecta.");
+                  this.mostrarPopup("Contraseña incorrecta.");
                   return throwError('Contraseña incorrecta.');
                 }
               }),
               catchError((medicoError) => {
                 if (!userFound) {
                   console.error("Email no encontrado.", medicoError);
-                  alert("Email no encontrado");
+                  this.mostrarPopup("Email no encontrado");
                   return throwError('Email no encontrado');
                 } else {
                   return '';
@@ -93,5 +96,12 @@ export class LoginComponent implements OnInit {
     const hashBuffer = await crypto.subtle.digest('SHA-256', data);
     const hashArray = Array.from(new Uint8Array(hashBuffer));
     return hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
+  }
+
+  mostrarPopup(mensaje: string): void {
+    this.dialog.open(GenericPopupComponent, {
+      width: '300px',
+      data: { message: mensaje }
+    });
   }
 }

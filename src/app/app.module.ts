@@ -15,6 +15,11 @@ import { BaseComponent } from './components/base/base.component';
 import { PacientesComponent } from './components/pacientes/pacientes.component';
 import { LoginComponent } from './components/login/login.component';
 import { MedicosComponent } from './components/medicos/medicos.component';
+import { HistorialClinicoPopupComponent } from './components/historial-clinico-popup/historial-clinico-popup.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {MatButtonModule} from "@angular/material/button";
+import { GenericPopupComponent } from './components/generic-popup/generic-popup.component';
 
 @NgModule({
   declarations: [
@@ -26,18 +31,24 @@ import { MedicosComponent } from './components/medicos/medicos.component';
     BaseComponent,
     PacientesComponent,
     LoginComponent,
-    MedicosComponent
+    MedicosComponent,
+    HistorialClinicoPopupComponent,
+    GenericPopupComponent
   ],
   imports: [
     BrowserModule,
     NgbModule,
     RouterOutlet,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    MatButtonModule
   ],
   providers: [
     KeycloakService
   ],
+  entryComponents: [GenericPopupComponent],
   bootstrap: [AppComponent]
 })
 
