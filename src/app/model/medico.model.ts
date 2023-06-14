@@ -11,6 +11,7 @@ export class Medico {
     telefono ?: number,
     password ?: string,
     email ?: string,
+    sexo ?: string,
     numeroDeColegiado ?: string,
     especialidad ?: string,
     pacientesAsignados ?: []

@@ -1,5 +1,13 @@
-<h1 mat-dialog-title>Dialog with elements</h1>
-<div mat-dialog-content>This dialog showcases the title, close, content and actions elements.</div>
+<h1 mat-dialog-title>Historial Médico</h1>
+<div mat-dialog-content>
+  <p><strong>Altura: </strong> <span id="altura">{{paciente.altura}}</span></p>
+  <p><strong>Peso: </strong> <span id="peso">{{paciente.peso}}</span></p>
+  <p><strong>Alergias: </strong> <span id="alergias">{{historialClinico.alergias}}</span></p>
+  <p><strong>Enfermedades diagnosticadas: </strong> <span id="enfermedades">{{historialClinico.enfermedadesDiagnosticadas}}</span></p>
+  <p><strong>Intervenciones: </strong> <span id="intervenciones">{{historialClinico.intervenciones}}</span></p>
+  <p><strong>Medicación actual: </strong> <span id="medicacion">{{historialClinico.medicacionActual}}</span></p>
+</div>
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close="">Cerrar</button>
 </div>
+

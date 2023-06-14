@@ -12,6 +12,7 @@ export class Paciente {
     peso ?: number,
     telefono ?: number,
     contrasena ?: string,
+    sexo ?: string,
     email ?: string,
     historialClinicoId ?: Number,
     medicoAsignadoId ?: Number

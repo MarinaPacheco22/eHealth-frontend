@@ -13,6 +13,7 @@
       <th class="text-center">Nombre</th>
       <th class="text-center">Apellidos</th>
       <th class="text-center">Fecha de nacimiento</th>
+      <th class="text-center">Sexo</th>
       <th class="text-center">Altura</th>
       <th class="text-center">Peso</th>
       <th class="text-center">Historial Clinico</th>
@@ -24,11 +25,12 @@
       <td class="text-center">{{ paciente.nombre }}</td>
       <td class="text-center">{{ paciente.apellidos }}</td>
       <td class="text-center">{{ paciente.fechaNacimiento }}</td>
+      <td class="text-center">{{ paciente.sexo }}</td>
       <td class="text-center">{{ paciente.altura }} cm</td>
       <td class="text-center">{{ paciente.peso }} kg</td>
       <td class="text-center">
         <button>
-          <i class="fas fa-paperclip" (click)="mostrarHistorial()"></i>
+          <i class="fas fa-paperclip" (click)="mostrarHistorial(paciente)"></i>
         </button>
       </td>
 

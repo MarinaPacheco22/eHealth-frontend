@@ -1,20 +1,20 @@
-<ng-container *ngIf="showNavBar">
-  <app-navbar></app-navbar>
-</ng-container>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Regístrate</title>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
+<ng-container *ngIf="showNavBar">
+  <app-navbar></app-navbar>
+</ng-container>
 <body>
 <div class="container">
   <h1>Regístrate</h1>
-  <form id="form">
+  <form id="form" [formGroup]="registerForm">
     <div class="form-group">
       <label for="tipo-usuario">Seleccione su tipo de usuario:</label>
-      <select id="tipo-usuario" name="tipo-usuario" class="form-control" (change)="mostrarFormulario()">
+      <select id="tipo-usuario" name="tipo-usuario" class="form-control" formControlName="tipoUsuario" required>
         <option value="default" id="default" selected>-- Seleccione una opción --</option>
         <option value="medico">Médico</option>
         <option value="paciente">Paciente</option>
@@ -26,98 +26,98 @@
 
       <div class="form-group">
         <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" class="form-control" required>
+        <input type="text" id="nombre" name="nombre" class="form-control" formControlName="nombre" required>
       </div>
 
       <div class="form-group">
         <label for="apellidos">Apellidos:</label>
-        <input type="text" id="apellidos" name="apellidos" class="form-control" required>
+        <input type="text" id="apellidos" name="apellidos" class="form-control" formControlName="apellidos" required>
       </div>
 
       <div class="form-group">
         <label for="dni">DNI:</label>
-        <input type="text" id="dni" name="dni" class="form-control" required>
+        <input type="text" id="dni" name="dni" class="form-control" formControlName="dni" required>
       </div>
 
       <div class="form-group">
         <label for="fecha-nacimiento">Fecha de nacimiento:</label>
-        <input type="date" id="fecha-nacimiento" name="fecha-nacimiento" class="form-control" required>
+        <input type="date" id="fecha-nacimiento" name="fecha-nacimiento" class="form-control" formControlName="fechaNacimiento" required>
       </div>
 
       <div class="form-group">
-        <label>Género:</label>
+        <label>Sexo:</label>
         <div class="form-check">
-          <input type="radio" id="genero-hombre" name="genero" value="hombre" class="form-check-input" required>
-          <label for="genero-hombre" class="form-check-label">Hombre</label>
+          <input type="radio" id="sexo-hombre" name="sexo" value="hombre" class="form-check-input" formControlName="sexo" [checked]="true">
+          <label for="sexo-hombre" class="form-check-label">Hombre</label>
         </div>
         <div class="form-check">
-          <input type="radio" id="genero-mujer" name="genero" value="mujer" class="form-check-input" required>
-          <label for="genero-mujer" class="form-check-label">Mujer</label>
+          <input type="radio" id="sexo-mujer" name="sexo" value="mujer" class="form-check-input" formControlName="sexo">
+          <label for="sexo-mujer" class="form-check-label">Mujer</label>
         </div>
       </div>
 
       <div class="form-group">
         <label for="telefono">Teléfono:</label>
-        <input type="tel" id="telefono" name="telefono" class="form-control" required>
+        <input type="tel" id="telefono" name="telefono" class="form-control" formControlName="telefono" required>
       </div>
 
       <div class="form-group">
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" class="form-control" required>
+        <input type="email" id="email" name="email" class="form-control" formControlName="email" required>
       </div>
 
       <div class="form-group">
         <label for="password">Contraseña:</label>
-        <input type="password" id="password" minlength="8" class="form-control"  placeholder="Mínimo 8 caracteres" required>
+        <input type="password" id="password" minlength="8" class="form-control"  placeholder="Mínimo 8 caracteres" formControlName="password" required>
       </div>
     </div>
 
-    <div id="datos-personales-paciente" style="display:none;">
+    <div id="datos-personales-paciente" *ngIf="registerForm.get('tipoUsuario').value === 'paciente'">
 
       <div class="form-group">
         <label for="num-seguridad-social">Número de la seguridad social:</label>
-        <input type="text" id="num-seguridad-social" name="num-seguridad-social" class="form-control" required>
+        <input type="text" id="num-seguridad-social" name="num-seguridad-social" class="form-control" formControlName="numSeguridadSocial" required>
       </div>
 
       <div class="form-group">
         <label for="altura">Altura (cm):</label>
-        <input type="number" class="form-control" id="altura" name="altura">
+        <input type="number" class="form-control" id="altura" name="altura" formControlName="altura">
       </div>
 
       <div class="form-group">
         <label for="peso">Peso (kg):</label>
-        <input type="number" class="form-control" id="peso" name="peso">
+        <input type="number" class="form-control" id="peso" name="peso" formControlName="peso">
       </div>
 
       <h2>Historial clínico</h2>
 
       <div class="form-group">
         <label for="alergias">Alergias:</label>
-        <input type="text" class="form-control" id="alergias" name="alergias" placeholder="Escriba las alergias separadas por coma.">
+        <input type="text" class="form-control" id="alergias" name="alergias" placeholder="Escriba las alergias separadas por coma." formControlName="alergias">
       </div>
 
       <div class="form-group">
         <label>Enfermedades:</label>
-        <input type="text" class="form-control" id="enfermedades" placeholder="Escriba las enfermedades separadas por coma.">
+        <input type="text" class="form-control" id="enfermedades" placeholder="Escriba las enfermedades separadas por coma." formControlName="enfermedades">
       </div>
 
       <div class="form-group">
         <label>Intervenciones:</label>
-        <input type="text" class="form-control" id="intervenciones" placeholder="Escriba las intervenciones separadas por coma.">
+        <input type="text" class="form-control" id="intervenciones" placeholder="Escriba las intervenciones separadas por coma." formControlName="intervenciones">
       </div>
 
     </div>
 
-    <div id="datos-personales-medico" style="display:none;">
+    <div id="datos-personales-medico"*ngIf="registerForm.get('tipoUsuario').value === 'medico'">
 
       <div class="form-group">
         <label for="num-colegiado">Número de colegiado:</label>
-        <input type="text" id="num-colegiado" name="num-colegiado" class="form-control" required>
+        <input type="text" id="num-colegiado" name="num-colegiado" class="form-control" formControlName="numColegiado" required>
       </div>
 
       <div class="form-group">
         <label for="especialidad">Seleccione su especialidad:</label>
-        <select id="especialidad" name="especialidad" class="form-control">
+        <select id="especialidad" name="especialidad" class="form-control" formControlName="especialidad">
           <option value="default-especialidad" id="default-especialidad">-- Selecciona una especialidad --</option>
           <option *ngFor="let especialidad of especialidades" [value]="especialidad">{{ especialidad }}</option>
         </select>
@@ -126,13 +126,10 @@
     </div>
 
   </form>
-  <div class="button-container" id="send-button" style="display:none;">
-    <button class="btn btn-primary" id="sendBtn" (click)="send()">Registrarme</button>
-  </div>
-  <div class="button-container" id="back-button">
-    <button class="btn btn-secondary" (click)="back()">Volver</button>
+  <div class="button-container" id="send-button">
+    <button class="register-button" id="sendBtn" (click)="send()">Registrarme</button>
+    <button class="back-button" (click)="back()">Volver</button>
   </div>
 </div>
 </body>
 </html>
-

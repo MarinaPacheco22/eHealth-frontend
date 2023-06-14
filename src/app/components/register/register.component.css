@@ -1,8 +1,27 @@
-label, input, button, select {
+label, input, select {
   display: block;
   margin-bottom: 10px;
 }
 
 .container {
   margin-top: 100px;
+}
+
+.register-button {
+  background-color: blue;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  margin-right: 20px;
+  margin-top: 20px;
+}
+
+.back-button {
+  background-color: grey;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  margin-top: 20px;
 }

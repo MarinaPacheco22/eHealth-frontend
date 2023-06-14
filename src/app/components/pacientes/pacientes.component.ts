@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PacientesService} from "../../services/pacientes.service";
 import {catchError, throwError} from "rxjs";
 import {RolService} from "../../services/rol.service";
 import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {HistorialClinicoPopupComponent} from "../historial-clinico-popup/historial-clinico-popup.component";
+import {GenericPopupComponent} from "../generic-popup/generic-popup.component";
 
 @Component({
   selector: 'app-pacientes',
@@ -14,7 +15,6 @@ import {HistorialClinicoPopupComponent} from "../historial-clinico-popup/histori
 export class PacientesComponent implements OnInit {
 
   public pacientesAsignados: any;
-  public medicoId: number = 8;
   showNavBar: boolean = true;
 
   constructor(
@@ -31,19 +31,18 @@ export class PacientesComponent implements OnInit {
       this.pacientesService.getAllPacientes()
         .pipe(
           catchError((error) => {
-            alert(error.error);
+            this.mostrarGenericPopup(error.error);
             return throwError(error);
           })
         )
         .subscribe(response => {
-          console.log(response.body);
           this.pacientesAsignados = response.body;
         });
     } else {
-      this.pacientesService.getPacientesByMedico(this.medicoId)
+      this.pacientesService.getPacientesByMedico(Number(this.rolService.getUserId()))
         .pipe(
           catchError((error) => {
-            alert(error.error);
+            this.mostrarGenericPopup(error.error);
             return throwError(error);
           })
         )
@@ -54,13 +53,20 @@ export class PacientesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.rolService.setUserType('admin');
     this.getPacientesAsignados();
   }
 
-  mostrarHistorial() {
+  mostrarHistorial(paciente: any) {
     this.dialog.open(HistorialClinicoPopupComponent, {
-      panelClass: 'dialog-center'
+      panelClass: 'dialog-center',
+      data: paciente
+    });
+  }
+
+  mostrarGenericPopup(mensaje: string): void {
+    this.dialog.open(GenericPopupComponent, {
+      width: '300px',
+      data: { message: mensaje }
     });
   }
 }

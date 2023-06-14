@@ -3,16 +3,22 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item" *ngIf="getUserType()=='admin'" [class.active]="isActive('/solicitudes')">
-        <a class="nav-link" routerLink="/solicitudes" routerLinkActive="active">Solicitudes pendientes</a>
+        <a class="nav-link" routerLink="/medicos" [queryParams]="{ modo: 'solicitudes' }"routerLinkActive="active">Solicitudes pendientes</a>
       </li>
       <li class="nav-item" *ngIf="getUserType()=='medico'" [class.active]="isActive('/mensajes')">
         <a class="nav-link" routerLink="/mensajes" routerLinkActive="active">Mensajes</a>
       </li>
       <li class="nav-item" *ngIf="getUserType()=='admin'" [class.active]="isActive('/medicos')">
-        <a class="nav-link" routerLink="/medicos" routerLinkActive="active">Medicos</a>
+        <a class="nav-link" routerLink="/medicos" [queryParams]="{ modo: 'medicos' }" routerLinkActive="active">Medicos</a>
       </li>
       <li class="nav-item" *ngIf="getUserType()=='admin' || getUserType()=='medico'" [class.active]="isActive('/pacientes')">
         <a class="nav-link" routerLink="/pacientes" routerLinkActive="active">Pacientes</a>
+      </li>
+      <li class="nav-item" *ngIf="getUserType()=='paciente'" [class.active]="isActive('/consultas')">
+        <a class="nav-link" routerLink="/consultas" routerLinkActive="active">Consultas</a>
+      </li>
+      <li class="nav-item" *ngIf="getUserType()=='paciente'" [class.active]="isActive('/perfil')">
+        <a class="nav-link" routerLink="/perfil" routerLinkActive="active">Perfil</a>
       </li>
       <li class="nav-item" [class.active]="isActive('/main')">
         <a class="nav-link" routerLink="/main" routerLinkActive="active">Cerrar Sesión</a>

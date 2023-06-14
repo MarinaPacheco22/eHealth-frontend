@@ -5,7 +5,7 @@
 <ng-container *ngIf="showNavBar">
   <app-navbar></app-navbar>
 </ng-container>
-<div id="table-container">
+<div id="table-container" *ngIf="medicos; else noData">
   <table id="medicos-table" class="table table-hover">
     <thead>
     <tr>
@@ -16,6 +16,7 @@
       <th class="text-center">Numero de colegiado</th>
       <th class="text-center">Especialidad</th>
       <th class="text-center">Activo</th>
+      <th class="text-center"></th>
     </tr>
     </thead>
     <tbody>
@@ -30,7 +31,23 @@
         <i class="fas fa-check" *ngIf="medico.activo"></i>
         <i class="fas fa-times" *ngIf="!medico.activo"></i>
       </td>
+      <td class="text-center">
+        <button>
+          <i class="fas fa-search" (click)="revisar(medico)"> Revisar</i>
+        </button>
+      </td>
     </tr>
     </tbody>
   </table>
 </div>
+
+<ng-template class="message-container" #noData>
+  <p class="message" >{{ noDataMessage }}</p>
+</ng-template>
+
+
+
+
+
+
+

@@ -1,0 +1,100 @@
+<ng-container *ngIf="showNavBar">
+  <app-navbar></app-navbar>
+</ng-container>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Perfil de Paciente</title>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+  <h1 class="mt-4">Perfil</h1>
+  <div class="card mt-4">
+    <div class="card-body paciente-info">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="info-item">
+            <label class="font-weight-bold">Nombre:</label>
+            <span [ngClass]="{ 'd-none': isEditing }" id="nombre">{{ paciente.nombre }}</span>
+            <input type="text" [ngClass]="{ 'd-none': !isEditing }" id="inputNombre" class="form-control" [(ngModel)]="paciente.nombre">
+          </div>
+          <div class="info-item">
+            <label class="font-weight-bold">Apellidos:</label>
+            <span [ngClass]="{ 'd-none': isEditing }" id="apellidos">{{ paciente.apellidos }}</span>
+            <input type="text" [ngClass]="{ 'd-none': !isEditing }" id="inputApellido" class="form-control" [(ngModel)]="paciente.apellidos">
+          </div>
+          <div class="info-item">
+            <label class="font-weight-bold">DNI:</label>
+            <span [ngClass]="{ 'd-none': isEditing }" id="dni">{{ paciente.dni }}</span>
+            <input type="text" [ngClass]="{ 'd-none': !isEditing }" id="inputDni" class="form-control" [(ngModel)]="paciente.dni">
+          </div>
+          <div class="info-item">
+            <label class="font-weight-bold">Fecha de Nacimiento:</label>
+            <span [ngClass]="{ 'd-none': isEditing }" id="fechaNacimiento">{{ paciente.fechaNacimiento }}</span>
+            <input type="text" [ngClass]="{ 'd-none': !isEditing }" id="inputFechaNacimiento" class="form-control" [(ngModel)]="paciente.fechaNacimiento">
+          </div>
+          <div class="info-item">
+            <label class="font-weight-bold">Número de Seguridad Social:</label>
+            <span [ngClass]="{ 'd-none': isEditing }" id="numSegSocial">{{ paciente.numSegSocial }}</span>
+            <input type="text" [ngClass]="{ 'd-none': !isEditing }" id="inputnumSs" class="form-control" [(ngModel)]="paciente.numSegSocial">
+          </div>
+          <div class="info-item">
+            <label class="font-weight-bold">Altura:</label>
+            <span [ngClass]="{ 'd-none': isEditing }" id="altura">{{ paciente.altura }} cm</span>
+            <input type="text" [ngClass]="{ 'd-none': !isEditing }" id="inputAltura" class="form-control" [(ngModel)]="paciente.altura">
+          </div>
+          <div class="info-item">
+            <label class="font-weight-bold">Peso:</label>
+            <span [ngClass]="{ 'd-none': isEditing }" id="peso">{{ paciente.peso }} kg</span>
+            <input type="text" [ngClass]="{ 'd-none': !isEditing }" id="inputPeso" class="form-control" [(ngModel)]="paciente.peso">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="info-item">
+            <label class="font-weight-bold">Teléfono:</label>
+            <span [ngClass]="{ 'd-none': isEditing }" id="telefono">{{ paciente.telefono }}</span>
+            <input type="text" [ngClass]="{ 'd-none': !isEditing }" id="inputTelefono" class="form-control" [(ngModel)]="paciente.telefono">
+          </div>
+          <div class="info-item">
+            <label class="font-weight-bold">Email:</label>
+            <span [ngClass]="{ 'd-none': isEditing }" id="email">{{ paciente.email }}</span>
+            <input type="text" [ngClass]="{ 'd-none': !isEditing }" id="inputEmail" class="form-control" [(ngModel)]="paciente.email">
+          </div>
+          <div class="info-item">
+            <label class="font-weight-bold">Médico de cabecera asignado:</label>
+            <span [ngClass]="{ 'd-none': isEditing }" id="medicoAsignado">{{ medicoAsignado.nombre }} {{ medicoAsignado.apellidos }}</span>
+          </div>
+
+          <div class="info-item">
+            <label class="font-weight-bold">Alergias:</label>
+            <span [ngClass]="{ 'd-none': isEditing }" id="alergias">{{ historialClinico.alergias }}</span>
+            <input type="text" [ngClass]="{ 'd-none': !isEditing }" id="inputAlergias" class="form-control" [(ngModel)]="historialClinico.alergias">
+          </div>
+          <div class="info-item">
+            <label class="font-weight-bold">Enfermedades Diagnosticadas:</label>
+            <span [ngClass]="{ 'd-none': isEditing }" id="enfermedades">{{ historialClinico.enfermedadesDiagnosticadas }}</span>
+            <input type="text" [ngClass]="{ 'd-none': !isEditing }" id="inputEnfermedades" class="form-control" [(ngModel)]="historialClinico.enfermedadesDiagnosticadas">
+          </div>
+          <div class="info-item">
+            <label class="font-weight-bold">Medicación Actual:</label>
+            <span [ngClass]="{ 'd-none': isEditing }" id="medicacion">{{ historialClinico.medicacionActual }}</span>
+            <input type="text" [ngClass]="{ 'd-none': !isEditing }" id="inputMedicacion" class="form-control" [(ngModel)]="historialClinico.medicacionActual">
+          </div>
+          <div class="info-item">
+            <label class="font-weight-bold">Intervenciones:</label>
+            <span [ngClass]="{ 'd-none': isEditing }" id="intervenciones">{{ historialClinico.intervenciones }}</span>
+            <input type="text" [ngClass]="{ 'd-none': !isEditing }" id="inputIntervenciones" class="form-control" [(ngModel)]="historialClinico.intervenciones">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="button-container">
+    <button class="edit-profile-button" (click)="isEditing ? editarPerfil() : editar()">Editar Perfil</button>
+    <button class="change-password-button" *ngIf="!isEditing" (click)="changePassword()">Cambiar Contraseña</button>
+    <button class="back-button" *ngIf="isEditing" (click)="back()">Volver</button>
+  </div>
+</div>
+</body>
+</html>

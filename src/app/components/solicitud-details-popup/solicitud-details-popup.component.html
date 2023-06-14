@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>Historial Médico</h1>
+<div mat-dialog-content>
+  <p><strong>Fecha: </strong> <span id="fecha">{{consulta.fecha}}</span></p>
+  <p><strong>Medico asignado: </strong> <span id="medico">{{consulta.medicoOutDto.nombre}} {{consulta.medicoOutDto.apellidos}}</span></p>
+  <p><strong>Descripcion: </strong> <span id="descripcion">{{consulta.descripcion}}</span></p>
+  <p><strong>Estado: </strong> <span id="estado">{{consulta.estado}}</span></p>
+</div>
+<!--<button>-->
+<!--  <button class="button-container" (click)="activar(solicitud.id)">Activar</button>-->
+<!--</button>-->
+<div mat-dialog-actions class="button-container">
+  <button mat-button mat-dialog-close="">Cerrar</button>
+</div>
+

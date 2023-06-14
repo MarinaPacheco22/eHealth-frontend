@@ -1,17 +1,39 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RolService {
 
-  private userRol: string;
-
   setUserType(userRol: string) {
-    this.userRol = userRol;
+    localStorage.setItem('userRol', userRol);
   }
 
   getUserType() {
-    return this.userRol;
+    return localStorage.getItem('userRol')
+  }
+
+  setUserId(userId: number) {
+    localStorage.setItem('userId', userId.toString());
+  }
+
+  getUserId() {
+    return localStorage.getItem('userId')
+  }
+
+  setMedicoAsignadoId(medicoAsignadoId: number) {
+    localStorage.setItem('medicoAsignadoId', medicoAsignadoId.toString());
+  }
+
+  getMedicoAsignadoId() {
+    return localStorage.getItem('medicoAsignadoId')
+  }
+
+  setHashPassword(hashPassword: string) {
+    localStorage.setItem('hashPassword', hashPassword);
+  }
+
+  getHashPassword() {
+    return localStorage.getItem('hashPassword');
   }
 }

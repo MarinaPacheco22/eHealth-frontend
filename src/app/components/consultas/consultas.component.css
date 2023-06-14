@@ -1,0 +1,41 @@
+.message-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.message {
+  text-align: center;
+  font-size: 18px;
+  color: #333;
+}
+
+.button-container {
+  position: fixed;
+  top: 150px;
+  right: 0;
+  margin: 20px;
+  z-index: 1;
+}
+
+.add-button {
+  background-color: blue;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  margin-right: 20px;
+  border-radius: 10px;
+  position: sticky;
+}
+
+#table-container {
+  margin-top: 50px;
+}
+
+

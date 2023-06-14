@@ -1,0 +1,42 @@
+<head>
+  <title>Consultas</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous" />
+</head>
+<ng-container *ngIf="showNavBar">
+  <app-navbar></app-navbar>
+</ng-container>
+<div class="button-container">
+  <button class="add-button" (click)="nuevaSolicitud()">Nueva Solicitud</button>
+</div>
+<div id="table-container" *ngIf="consultas; else noData">
+  <table id="medicos-table" class="table table-hover">
+    <thead>
+    <tr>
+      <th></th>
+      <th class="text-center">Fecha</th>
+      <th class="text-center">Medico Asignado</th>
+      <th class="text-center">Tipo de consulta</th>
+      <th class="text-center">Estado de la consulta</th>
+      <th class="text-center"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let consulta of consultas">
+      <td></td>
+      <td  class="text-center">{{ consulta.fecha }}</td>
+      <td  class="text-center">{{ consulta.medicoOutDto.nombre }} {{ consulta.medicoOutDto.apellidos}}</td>
+      <td  class="text-center">{{ consulta.medicoOutDto.especialidad }}</td>
+      <td  class="text-center">{{ consulta.estado }}</td>
+      <td class="text-center">
+        <button>
+          <i class="fas fa-search" (click)="showDetails(consulta)"> Detalles </i>
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template class="message-container" #noData>
+  <p class="message" >{{ noDataMessage }}</p>
+</ng-template>

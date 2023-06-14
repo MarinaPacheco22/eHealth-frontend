@@ -8,6 +8,9 @@ import {PacientesComponent} from "./components/pacientes/pacientes.component";
 import {LoginComponent} from "./components/login/login.component";
 import {MedicosComponent} from "./components/medicos/medicos.component";
 import {HistorialClinicoPopupComponent} from "./components/historial-clinico-popup/historial-clinico-popup.component";
+import {SolicitudConsultaComponent} from "./components/solicitud-consulta/solicitud-consulta.component";
+import {PerfilComponent} from "./components/perfil/perfil.component";
+import {ConsultasComponent} from "./components/consultas/consultas.component";
 
 const routes: Routes = [
   {path: '', redirectTo: 'main', pathMatch: 'full'},
@@ -18,7 +21,10 @@ const routes: Routes = [
   {path: 'pacientes', component: PacientesComponent},
   {path: 'medicos', component: MedicosComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'historial-clinico', component: HistorialClinicoPopupComponent}
+  {path: 'historial-clinico', component: HistorialClinicoPopupComponent},
+  {path: 'consultas', component: ConsultasComponent},
+  {path: 'solicitud-consulta', component: SolicitudConsultaComponent},
+  {path: 'perfil', component: PerfilComponent}
 ];
 
 @NgModule({

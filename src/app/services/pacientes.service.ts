@@ -1,7 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {ConfigEnvService} from "../config-env.service";
 import {HttpClient} from "@angular/common/http";
-import {Paciente} from "../model/paciente.model";
 import {Observable} from "rxjs";
 
 @Injectable({
@@ -21,7 +20,7 @@ export class PacientesService {
     });
   }
 
-  getPacientesByEmail(email: string) {
+  getPacienteByEmail(email: string): Observable<any> {
     return this.http.get<any>(this.API_ENDPOINT + "/paciente/by-email/" + email, {
       params: undefined,
       observe: 'response'
@@ -35,8 +34,30 @@ export class PacientesService {
     });
   }
 
-  createPaciente(paciente: Paciente): Observable<any> {
+  createPaciente(paciente: any): Observable<any> {
     return this.http.post<any>(this.API_ENDPOINT + '/paciente/', paciente, {
+      params: undefined,
+      observe: 'response'
+    });
+  }
+
+  getPacienteById(id: number) {
+    return this.http.get<any>(this.API_ENDPOINT + "/paciente/" + id, {
+      params: undefined,
+      observe: 'response'
+    });
+
+  }
+
+  update(paciente: any): Observable<any> {
+    return this.http.put<any>(this.API_ENDPOINT + '/paciente/' + paciente.id, paciente, {
+      params: undefined,
+      observe: 'response'
+    });
+  }
+
+  changePassword(pacienteId: number, password: string) {
+    return this.http.put<any>(this.API_ENDPOINT + '/paciente/change-password/' + pacienteId, password, {
       params: undefined,
       observe: 'response'
     });

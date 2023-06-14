@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {ConfigEnvService} from "../config-env.service";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
@@ -16,6 +16,20 @@ export class HistorialClinicoService {
 
   createHistorialClinico(historial: HistorialClinico): Observable<any> {
     return this.http.post<any>(this.API_ENDPOINT + '/historial-clinico/', historial, {
+      params: undefined,
+      observe: 'response'
+    });
+  }
+
+  getHistorialClinicoByPacienteId(id: number): Observable<any>{
+    return this.http.get<any>(this.API_ENDPOINT + '/historial-clinico/by-paciente/' + id, {
+      params: undefined,
+      observe: 'response'
+    });
+  }
+
+  update(historial: any) {
+    return this.http.put<any>(this.API_ENDPOINT + '/historial-clinico/' + historial.id, historial, {
       params: undefined,
       observe: 'response'
     });
