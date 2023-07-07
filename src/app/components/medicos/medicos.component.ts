@@ -41,6 +41,7 @@ export class MedicosComponent implements OnInit {
           })
         )
         .subscribe(response => {
+          console.log(response.body);
           this.medicos = response.body;
         });
 
@@ -79,5 +80,17 @@ export class MedicosComponent implements OnInit {
 
   isEmpty() {
     return this.medicos.length == 0;
+  }
+
+
+  realizarBusquedaFiltrada(filters: any) {
+    this.medicosService.getMedicosFiltrados(filters.nombre, filters.apellidos, filters.especialidad, filters.activo).subscribe(
+      (response) => {
+        this.medicos = response.body;
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   }
 }

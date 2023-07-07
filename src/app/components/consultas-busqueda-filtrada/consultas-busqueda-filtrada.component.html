@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="filtered-search-container">
+    <label for="estado">Estado:</label>
+    <select id="estado" [(ngModel)]="estado">
+      <option></option>
+      <option value="0">Solicitud enviada</option>
+      <option value="1">Solicitud cerrada</option>
+      <option value="2">Derivación</option>
+    </select>
+
+    <label for="especialidad">Especialidad:</label>
+    <select id="especialidad" [(ngModel)]="especialidad">
+      <option></option>
+      <option *ngFor="let especialidad of especialidades" [value]="especialidad">{{ especialidad }}</option>
+      <!-- Otras opciones de especialidad -->
+    </select>
+
+    <label for="fecha">Fecha:</label>
+    <input type="date" id="fecha" [(ngModel)]="fecha">
+
+    <button (click)="realizarBusqueda()">Buscar</button>
+    <button (click)="limpiarCampos()">Limpiar</button>
+  </div>
+</div>

@@ -30,9 +30,8 @@
             <input type="text" [ngClass]="{ 'd-none': !isEditing }" id="inputDni" class="form-control" [(ngModel)]="paciente.dni">
           </div>
           <div class="info-item">
-            <label class="font-weight-bold">Fecha de Nacimiento:</label>
-            <span [ngClass]="{ 'd-none': isEditing }" id="fechaNacimiento">{{ paciente.fechaNacimiento }}</span>
-            <input type="text" [ngClass]="{ 'd-none': !isEditing }" id="inputFechaNacimiento" class="form-control" [(ngModel)]="paciente.fechaNacimiento">
+            <label [ngClass]="{ 'd-none': isEditing }" class="font-weight-bold">Fecha de Nacimiento:</label>
+            <span [ngClass]="{ 'd-none': isEditing }" id="fechaNacimiento">{{paciente.fechaNacimiento.dayOfMonth}}/{{paciente.fechaNacimiento.monthValue}}/{{paciente.fechaNacimiento.year}}</span>
           </div>
           <div class="info-item">
             <label class="font-weight-bold">Número de Seguridad Social:</label>

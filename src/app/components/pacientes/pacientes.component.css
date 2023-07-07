@@ -1,4 +1,51 @@
 .column-width {
   width: 30px;
 }
+.history-button {
+  background-color: green;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  margin-right: 20px;
+  border-radius: 10px;
+  position: sticky;
+}
+
+.message-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.message {
+  text-align: center;
+  font-size: 18px;
+  color: #333;
+}
+
+.review-button {
+  background-color: green;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  margin-right: 20px;
+  border-radius: 10px;
+  position: sticky;
+}
+
+td, th {
+  vertical-align: middle;
+}
+
+.row {
+  margin-top: 30px;
+}
+
 

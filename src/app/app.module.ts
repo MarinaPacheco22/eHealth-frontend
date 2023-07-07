@@ -29,6 +29,10 @@ import {PerfilComponent} from './components/perfil/perfil.component';
 import {ConsultasComponent} from './components/consultas/consultas.component';
 import {SolicitudDetailsPopupComponent} from './components/solicitud-details-popup/solicitud-details-popup.component';
 import {ChangePasswordPopupComponent} from './components/change-password-popup/change-password-popup.component';
+import { ArchivosComponent } from './components/archivos/archivos.component';
+import { ConsultasBusquedaFiltradaComponent } from './components/consultas-busqueda-filtrada/consultas-busqueda-filtrada.component';
+import { MedicosBusquedaFiltradaComponent } from './components/medicos-busqueda-filtrada/medicos-busqueda-filtrada.component';
+import { PacientesBusquedaFiltradaComponent } from './components/pacientes-busqueda-filtrada/pacientes-busqueda-filtrada.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +54,11 @@ import {ChangePasswordPopupComponent} from './components/change-password-popup/c
     PerfilComponent,
     ConsultasComponent,
     SolicitudDetailsPopupComponent,
-    ChangePasswordPopupComponent
+    ChangePasswordPopupComponent,
+    ArchivosComponent,
+    ConsultasBusquedaFiltradaComponent,
+    MedicosBusquedaFiltradaComponent,
+    PacientesBusquedaFiltradaComponent
   ],
   imports: [
     BrowserModule,

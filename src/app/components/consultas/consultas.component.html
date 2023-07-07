@@ -5,37 +5,47 @@
 <ng-container *ngIf="showNavBar">
   <app-navbar></app-navbar>
 </ng-container>
-<div class="button-container">
-  <button class="add-button" (click)="nuevaSolicitud()">Nueva Solicitud</button>
+<div class="row">
+  <div class="col-md-12">
+    <app-consultas-busqueda-filtrada (searchFiltered)="realizarBusquedaFiltrada($event)"></app-consultas-busqueda-filtrada>
+  </div>
 </div>
-<div id="table-container" *ngIf="consultas; else noData">
-  <table id="medicos-table" class="table table-hover">
-    <thead>
-    <tr>
-      <th></th>
-      <th class="text-center">Fecha</th>
-      <th class="text-center">Medico Asignado</th>
-      <th class="text-center">Tipo de consulta</th>
-      <th class="text-center">Estado de la consulta</th>
-      <th class="text-center"></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let consulta of consultas">
-      <td></td>
-      <td  class="text-center">{{ consulta.fecha }}</td>
-      <td  class="text-center">{{ consulta.medicoOutDto.nombre }} {{ consulta.medicoOutDto.apellidos}}</td>
-      <td  class="text-center">{{ consulta.medicoOutDto.especialidad }}</td>
-      <td  class="text-center">{{ consulta.estado }}</td>
-      <td class="text-center">
-        <button>
-          <i class="fas fa-search" (click)="showDetails(consulta)"> Detalles </i>
-        </button>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+<div class="row">
+  <div class="col-md-12">
+    <div class="button-container">
+      <button class="add-button" (click)="nuevaSolicitud()">Nueva Solicitud</button>
+    </div>
+    <div id="table-container" *ngIf="consultas; else noData">
+      <table id="medicos-table" class="table table-hover">
+        <thead>
+        <tr>
+          <th></th>
+          <th class="text-center">Fecha</th>
+          <th class="text-center">Medico Asignado</th>
+          <th class="text-center">Tipo de consulta</th>
+          <th class="text-center">Estado de la consulta</th>
+          <th class="text-center"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let consulta of consultas">
+          <td></td>
+          <td  class="text-center">{{consulta.fecha.dayOfMonth}}/{{consulta.fecha.monthValue}}/{{consulta.fecha.year}}</td>
+          <td  class="text-center">{{ consulta.medicoOutDto.nombre }} {{ consulta.medicoOutDto.apellidos}}</td>
+          <td  class="text-center">{{ consulta.medicoOutDto.especialidad }}</td>
+          <td  class="text-center">{{ consulta.estado }}</td>
+          <td class="text-center">
+            <button class="details-button">
+              <i class="fas fa-search" (click)="showDetails(consulta)"> Detalles </i>
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
+
 
 <ng-template class="message-container" #noData>
   <p class="message" >{{ noDataMessage }}</p>

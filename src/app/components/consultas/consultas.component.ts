@@ -16,7 +16,7 @@ export class ConsultasComponent implements OnInit {
   showNavBar: boolean = true;
   consultas: any;
   paciente_id: number;
-  noDataMessage: string = "No hay solicitudes para mostrar."
+  noDataMessage: string = "No hay solicitudes para mostrar.";
 
   constructor(private solicitudService: SolicitudService,
               private rolService: RolService,
@@ -38,6 +38,9 @@ export class ConsultasComponent implements OnInit {
           return throwError(error);
         })
       ).subscribe((response) => {
+        response.body.forEach((solicitud:any) => {
+          solicitud.fecha.monthValue = this.formatMonth(solicitud.fecha);
+        })
       this.consultas = response.body;
     });
   }
@@ -55,5 +58,31 @@ export class ConsultasComponent implements OnInit {
     dialogRef.afterClosed().subscribe(() => {
       this.ngOnInit();
     });
+  }
+
+  realizarBusquedaFiltrada(filters: any) {
+    this.solicitudService.getSolicitudesFiltradasByPaciente(this.paciente_id, filters.estado, filters.especialidad, filters.fecha).subscribe(
+      (response) => {
+        console.log(response.body);
+        if (response.body != null) {
+          response.body.forEach((solicitud:any) => {
+            solicitud.fecha.monthValue = this.formatMonth(solicitud.fecha);
+          })
+        }
+        this.consultas = response.body;
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
+
+  private formatMonth(date: any) {
+    const monthValue = date.monthValue;
+    if (monthValue < 10) {
+      return '0' + monthValue;
+    } else {
+      return monthValue.toString();
+    }
   }
 }

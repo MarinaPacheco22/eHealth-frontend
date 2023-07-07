@@ -16,6 +16,7 @@ export class PacientesComponent implements OnInit {
 
   public pacientesAsignados: any;
   showNavBar: boolean = true;
+  noDataMessage: string;
 
   constructor(
     private pacientesService: PacientesService,
@@ -27,6 +28,7 @@ export class PacientesComponent implements OnInit {
 
   getPacientesAsignados() {
     this.pacientesAsignados = [];
+    this.noDataMessage = "No hay pacientes para mostrar.";
     if (this.rolService.getUserType() == 'admin') {
       this.pacientesService.getAllPacientes()
         .pipe(
@@ -68,5 +70,29 @@ export class PacientesComponent implements OnInit {
       width: '300px',
       data: { message: mensaje }
     });
+  }
+
+  realizarBusquedaFiltrada(filters: any) {
+    if (this.rolService.getUserType() == 'admin') {
+      this.pacientesService.getPacientesFiltrados(filters.nombre, filters.apellidos, filters.sexo).subscribe(
+        (response) => {
+          console.log(response.body);
+          this.pacientesAsignados = response.body;
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+    } else {
+      this.pacientesService.getPacientesFiltradosByMedico(filters.nombre, filters.apellidos, filters.sexo, this.rolService.getUserId()).subscribe(
+        (response) => {
+          console.log(response.body);
+          this.pacientesAsignados = response.body;
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+    }
   }
 }

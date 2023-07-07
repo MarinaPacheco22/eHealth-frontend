@@ -259,7 +259,6 @@ export class RegisterComponent implements OnInit {
     for (const field of visibleFields) {
       const control = formFields[field];
       if (control && (!control.value || control.value === '')) {
-        debugger;
         return false;
       }
     }

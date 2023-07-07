@@ -14,3 +14,23 @@
   font-size: 18px;
   color: #333;
 }
+
+.review-button {
+  background-color: green;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  margin-right: 20px;
+  border-radius: 10px;
+  position: sticky;
+}
+
+td, th {
+  vertical-align: middle;
+}
+
+.row {
+  margin-top: 30px;
+}
+

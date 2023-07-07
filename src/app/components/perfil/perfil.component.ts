@@ -6,7 +6,6 @@ import {GenericPopupComponent} from "../generic-popup/generic-popup.component";
 import {MatDialog} from "@angular/material/dialog";
 import {MedicosService} from "../../services/medicos.service";
 import {HistorialClinicoService} from "../../services/historial-clinico.service";
-import {Router} from "@angular/router";
 import {ChangePasswordPopupComponent} from "../change-password-popup/change-password-popup.component";
 
 @Component({
@@ -27,8 +26,7 @@ export class PerfilComponent implements OnInit {
               private rolService: RolService,
               private dialog: MatDialog,
               private medicosService: MedicosService,
-              private historialClinicoService: HistorialClinicoService,
-              private router: Router) {
+              private historialClinicoService: HistorialClinicoService) {
   }
 
   ngOnInit(): void {
@@ -41,6 +39,7 @@ export class PerfilComponent implements OnInit {
         })
       )
       .subscribe((response) => {
+        response.body.fechaNacimiento.monthValue = this.formatMonth(response.body.fechaNacimiento);
         this.paciente = response.body;
         this.medicosService.getMedicoById(response.body.medicoAsignado)
           .pipe(
@@ -95,7 +94,6 @@ export class PerfilComponent implements OnInit {
         })
       ).subscribe(() => {
       this.historialClinico.pacienteId = this.paciente_id;
-      debugger;
       if (typeof this.historialClinico.alergias === 'string') {
         this.historialClinico.alergias = this.historialClinico.alergias.split(",");
       }
@@ -126,5 +124,14 @@ export class PerfilComponent implements OnInit {
 
   back() {
     this.isEditing = false;
+  }
+
+  private formatMonth(date: any) {
+    const monthValue = date.monthValue;
+    if (monthValue < 10) {
+      return '0' + monthValue;
+    } else {
+      return monthValue.toString();
+    }
   }
 }

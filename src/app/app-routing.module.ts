@@ -11,6 +11,7 @@ import {HistorialClinicoPopupComponent} from "./components/historial-clinico-pop
 import {SolicitudConsultaComponent} from "./components/solicitud-consulta/solicitud-consulta.component";
 import {PerfilComponent} from "./components/perfil/perfil.component";
 import {ConsultasComponent} from "./components/consultas/consultas.component";
+import {ArchivosComponent} from "./components/archivos/archivos.component";
 
 const routes: Routes = [
   {path: '', redirectTo: 'main', pathMatch: 'full'},
@@ -24,7 +25,8 @@ const routes: Routes = [
   {path: 'historial-clinico', component: HistorialClinicoPopupComponent},
   {path: 'consultas', component: ConsultasComponent},
   {path: 'solicitud-consulta', component: SolicitudConsultaComponent},
-  {path: 'perfil', component: PerfilComponent}
+  {path: 'perfil', component: PerfilComponent},
+  {path: 'archivos/:consultaId', component: ArchivosComponent}
 ];
 
 @NgModule({

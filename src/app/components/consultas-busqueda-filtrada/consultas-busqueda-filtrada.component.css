@@ -1,0 +1,39 @@
+.container {
+  display: flex;
+}
+
+.filtered-search-container {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: auto;
+  border: 1px solid #dee2e6;
+  border-radius: 20px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.filtered-search-container label {
+  font-weight: bold;
+}
+
+.filtered-search-container select,
+.filtered-search-container input[type="date"] {
+  width: 200px;
+}
+
+.filtered-search-container button {
+  background-color: dimgrey;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  margin-right: 20px;
+  border-radius: 10px;
+  position: sticky;
+}
+
+.filtered-search-container button:hover {
+  background-color: #0056b3;
+}

@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="filtered-search-container">
+    <label for="nombre">Nombre:</label>
+    <input type="string" id="nombre" [(ngModel)]="nombre">
+
+    <label for="apellidos">Apellidos:</label>
+    <input type="string" id="apellidos" [(ngModel)]="apellidos">
+
+    <label for="sexo">Sexo:</label>
+    <select id="sexo" [(ngModel)]="sexo">
+      <option></option>
+      <option value="1">Hombre</option>
+      <option value="0">Mujer</option>
+    </select>
+
+    <button class="search" (click)="realizarBusqueda()">Buscar</button>
+    <button (click)="limpiarCampos()">Limpiar</button>
+  </div>
+</div>

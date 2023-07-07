@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="filtered-search-container">
+    <label for="nombre">Nombre:</label>
+    <input type="string" id="nombre" [(ngModel)]="nombre">
+
+    <label for="apellidos">Apellidos:</label>
+    <input type="string" id="apellidos" [(ngModel)]="apellidos">
+
+    <label for="especialidad">Especialidad:</label>
+    <select id="especialidad" [(ngModel)]="especialidad">
+      <option></option>
+      <option *ngFor="let especialidad of especialidades" [value]="especialidad">{{ especialidad }}</option>
+    </select>
+
+    <label for="activo">Activo:</label>
+    <select id="activo" [(ngModel)]="activo">
+      <option></option>
+      <option value="true">Si</option>
+      <option value="false">No</option>
+    </select>
+
+    <button class="search" (click)="realizarBusqueda()">Buscar</button>
+    <button (click)="limpiarCampos()">Limpiar</button>
+  </div>
+</div>

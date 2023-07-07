@@ -1,48 +1,58 @@
 <head>
   <title>Medicos</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        crossorigin="anonymous"/>
 </head>
 <ng-container *ngIf="showNavBar">
   <app-navbar></app-navbar>
 </ng-container>
-<div id="table-container" *ngIf="medicos; else noData">
-  <table id="medicos-table" class="table table-hover">
-    <thead>
-    <tr>
-      <th></th>
-      <th class="text-center">Nombre</th>
-      <th class="text-center">Apellidos</th>
-      <th class="text-center">Fecha de nacimiento</th>
-      <th class="text-center">Numero de colegiado</th>
-      <th class="text-center">Especialidad</th>
-      <th class="text-center">Activo</th>
-      <th class="text-center"></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let medico of medicos">
-      <td></td>
-      <td  class="text-center">{{ medico.nombre }}</td>
-      <td  class="text-center">{{ medico.apellidos }}</td>
-      <td  class="text-center">{{ medico.fechaNacimiento }}</td>
-      <td  class="text-center">{{ medico.numeroDeColegiado }}</td>
-      <td  class="text-center">{{ medico.especialidad }}</td>
-      <td class="text-center">
-        <i class="fas fa-check" *ngIf="medico.activo"></i>
-        <i class="fas fa-times" *ngIf="!medico.activo"></i>
-      </td>
-      <td class="text-center">
-        <button>
-          <i class="fas fa-search" (click)="revisar(medico)"> Revisar</i>
-        </button>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+<div class="row">
+  <div class="col-md-12">
+    <app-medicos-busqueda-filtrada (searchFiltered)="realizarBusquedaFiltrada($event)"></app-medicos-busqueda-filtrada>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div id="table-container" *ngIf="medicos; else noData">
+      <table id="medicos-table" class="table table-hover">
+        <thead>
+        <tr>
+          <th></th>
+          <th class="text-center">Nombre</th>
+          <th class="text-center">Apellidos</th>
+          <th class="text-center">Fecha de nacimiento</th>
+          <th class="text-center">Numero de colegiado</th>
+          <th class="text-center">Especialidad</th>
+          <th class="text-center">Activo</th>
+          <th class="text-center"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let medico of medicos">
+          <td></td>
+          <td class="text-center">{{ medico.nombre }}</td>
+          <td class="text-center">{{ medico.apellidos }}</td>
+          <td class="text-center">{{medico.fechaNacimiento.dayOfMonth}}/{{medico.fechaNacimiento.monthValue}}/{{medico.fechaNacimiento.year}}</td>
+          <td class="text-center">{{ medico.numeroDeColegiado }}</td>
+          <td class="text-center">{{ medico.especialidad }}</td>
+          <td class="text-center">
+            <i class="fas fa-check" *ngIf="medico.activo"></i>
+            <i class="fas fa-times" *ngIf="!medico.activo"></i>
+          </td>
+          <td class="text-center">
+            <button class="review-button">
+              <i class="fas fa-search" (click)="revisar(medico)"> Revisar</i>
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
 
 <ng-template class="message-container" #noData>
-  <p class="message" >{{ noDataMessage }}</p>
+  <p class="message">{{ noDataMessage }}</p>
 </ng-template>
 
 

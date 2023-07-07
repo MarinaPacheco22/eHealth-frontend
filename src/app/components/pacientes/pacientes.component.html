@@ -1,40 +1,53 @@
 <head>
   <title>Pacientes</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        crossorigin="anonymous"/>
 </head>
 <ng-container *ngIf="showNavBar">
   <app-navbar></app-navbar>
 </ng-container>
-<div id="table-container">
-  <table id="pacientes-table" class="table table-hover">
-    <thead>
-    <tr>
-      <th></th>
-      <th class="text-center">Nombre</th>
-      <th class="text-center">Apellidos</th>
-      <th class="text-center">Fecha de nacimiento</th>
-      <th class="text-center">Sexo</th>
-      <th class="text-center">Altura</th>
-      <th class="text-center">Peso</th>
-      <th class="text-center">Historial Clinico</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let paciente of pacientesAsignados">
-      <td></td>
-      <td class="text-center">{{ paciente.nombre }}</td>
-      <td class="text-center">{{ paciente.apellidos }}</td>
-      <td class="text-center">{{ paciente.fechaNacimiento }}</td>
-      <td class="text-center">{{ paciente.sexo }}</td>
-      <td class="text-center">{{ paciente.altura }} cm</td>
-      <td class="text-center">{{ paciente.peso }} kg</td>
-      <td class="text-center">
-        <button>
-          <i class="fas fa-paperclip" (click)="mostrarHistorial(paciente)"></i>
-        </button>
-      </td>
-
-    </tr>
-    </tbody>
-  </table>
+<div class="row">
+  <div class="col-md-12">
+    <app-pacientes-busqueda-filtrada (searchFiltered)="realizarBusquedaFiltrada($event)"></app-pacientes-busqueda-filtrada>
+  </div>
 </div>
+<div class="row">
+  <div class="col-md-12">
+    <div id="table-container" *ngIf="pacientesAsignados; else noData">
+      <table id="pacientes-table" class="table table-hover">
+        <thead>
+        <tr>
+          <th></th>
+          <th class="text-center">Nombre</th>
+          <th class="text-center">Apellidos</th>
+          <th class="text-center">Fecha de nacimiento</th>
+          <th class="text-center">Sexo</th>
+          <th class="text-center">Altura</th>
+          <th class="text-center">Peso</th>
+          <th class="text-center">Historial Clinico</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let paciente of pacientesAsignados">
+          <td></td>
+          <td class="text-center">{{ paciente.nombre }}</td>
+          <td class="text-center">{{ paciente.apellidos }}</td>
+          <td class="text-center">{{ paciente.fechaNacimiento.dayOfMonth}}/{{paciente.fechaNacimiento.monthValue}}/{{paciente.fechaNacimiento.year }}</td>
+          <td class="text-center">{{ paciente.sexo }}</td>
+          <td class="text-center">{{ paciente.altura }} cm</td>
+          <td class="text-center">{{ paciente.peso }} kg</td>
+          <td class="text-center">
+            <button class="history-button">
+              <i class="fas fa-paperclip" (click)="mostrarHistorial(paciente)"> Ver</i>
+            </button>
+          </td>
+
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<ng-template class="message-container" #noData>
+  <p class="message">{{ noDataMessage }}</p>
+</ng-template>
