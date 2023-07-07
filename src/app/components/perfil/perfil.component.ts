@@ -39,7 +39,8 @@ export class PerfilComponent implements OnInit {
         })
       )
       .subscribe((response) => {
-        response.body.fechaNacimiento.monthValue = this.formatMonth(response.body.fechaNacimiento);
+        response.body.fechaNacimiento.monthValue = this.format(response.body.fechaNacimiento.monthValue);
+        response.body.fechaNacimiento.dayOfMonth = this.format(response.body.fechaNacimiento.dayOfMonth);
         this.paciente = response.body;
         this.medicosService.getMedicoById(response.body.medicoAsignado)
           .pipe(
@@ -126,12 +127,12 @@ export class PerfilComponent implements OnInit {
     this.isEditing = false;
   }
 
-  private formatMonth(date: any) {
-    const monthValue = date.monthValue;
-    if (monthValue < 10) {
-      return '0' + monthValue;
+  private format(number: any) {
+    const value = number;
+    if (value < 10) {
+      return '0' + value;
     } else {
-      return monthValue.toString();
+      return value.toString();
     }
   }
 }

@@ -33,6 +33,7 @@ import { ArchivosComponent } from './components/archivos/archivos.component';
 import { ConsultasBusquedaFiltradaComponent } from './components/consultas-busqueda-filtrada/consultas-busqueda-filtrada.component';
 import { MedicosBusquedaFiltradaComponent } from './components/medicos-busqueda-filtrada/medicos-busqueda-filtrada.component';
 import { PacientesBusquedaFiltradaComponent } from './components/pacientes-busqueda-filtrada/pacientes-busqueda-filtrada.component';
+import { SolicitudDetailsComponent } from './components/solicitud-details/solicitud-details.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { PacientesBusquedaFiltradaComponent } from './components/pacientes-busqu
     ArchivosComponent,
     ConsultasBusquedaFiltradaComponent,
     MedicosBusquedaFiltradaComponent,
-    PacientesBusquedaFiltradaComponent
+    PacientesBusquedaFiltradaComponent,
+    SolicitudDetailsComponent
   ],
   imports: [
     BrowserModule,

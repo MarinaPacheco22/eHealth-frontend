@@ -1,15 +1,15 @@
 <div class="container">
   <div class="filtered-search-container">
-    <label for="estado">Estado:</label>
-    <select id="estado" [(ngModel)]="estado">
+    <label for="estado" *ngIf="user_type == 'paciente'">Estado:</label>
+    <select id="estado" *ngIf="user_type == 'paciente'" [(ngModel)]="estado">
       <option></option>
       <option value="0">Solicitud enviada</option>
       <option value="1">Solicitud cerrada</option>
       <option value="2">Derivación</option>
     </select>
 
-    <label for="especialidad">Especialidad:</label>
-    <select id="especialidad" [(ngModel)]="especialidad">
+    <label for="especialidad" *ngIf="user_type == 'paciente'">Especialidad:</label>
+    <select id="especialidad" *ngIf="user_type == 'paciente'" [(ngModel)]="especialidad">
       <option></option>
       <option *ngFor="let especialidad of especialidades" [value]="especialidad">{{ especialidad }}</option>
       <!-- Otras opciones de especialidad -->
@@ -17,6 +17,12 @@
 
     <label for="fecha">Fecha:</label>
     <input type="date" id="fecha" [(ngModel)]="fecha">
+
+    <label for="nombre" *ngIf="user_type == 'medico'">Nombre:</label>
+    <input type="string" id="nombre" *ngIf="user_type == 'medico'" [(ngModel)]="nombre">
+
+    <label for="apellidos" *ngIf="user_type == 'medico'">Apellidos:</label>
+    <input type="string" id="apellidos" *ngIf="user_type == 'medico'" [(ngModel)]="apellidos">
 
     <button (click)="realizarBusqueda()">Buscar</button>
     <button (click)="limpiarCampos()">Limpiar</button>

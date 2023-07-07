@@ -27,8 +27,23 @@ export class SolicitudService {
     })
   }
 
+  getSolicitudesFiltradasByMedico(id: number, nombre: any, apellidos: any, fecha: any) {
+    const filter = "paciente.nombre:" + nombre + ",paciente.apellidos:" + apellidos + ",fecha:" + fecha + ",medico.id:" + id;
+    return this.http.get<any>(this.API_ENDPOINT + "/solicitud-consulta/filter?filter=" + filter, {
+      params: undefined,
+      observe: "response"
+    })
+  }
+
   getSolicitudesByPaciente(id: number) {
     return this.http.get<any>(this.API_ENDPOINT + "/solicitud-consulta/by-paciente/" + id, {
+      params: undefined,
+      observe: 'response'
+    });
+  }
+
+  getSolicitudesByMedico(id: number) {
+    return this.http.get<any>(this.API_ENDPOINT + "/solicitud-consulta/by-medico/" + id, {
       params: undefined,
       observe: 'response'
     });

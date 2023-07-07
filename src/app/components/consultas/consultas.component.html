@@ -21,9 +21,10 @@
         <tr>
           <th></th>
           <th class="text-center">Fecha</th>
-          <th class="text-center">Medico Asignado</th>
-          <th class="text-center">Tipo de consulta</th>
-          <th class="text-center">Estado de la consulta</th>
+          <th class="text-center" *ngIf="user_type == 'paciente'">Medico Asignado</th>
+          <th class="text-center" *ngIf="user_type == 'medico'">Paciente</th>
+          <th class="text-center" *ngIf="user_type == 'paciente'">Tipo de consulta</th>
+          <th class="text-center" *ngIf="user_type == 'paciente'">Estado de la consulta</th>
           <th class="text-center"></th>
         </tr>
         </thead>
@@ -31,12 +32,18 @@
         <tr *ngFor="let consulta of consultas">
           <td></td>
           <td  class="text-center">{{consulta.fecha.dayOfMonth}}/{{consulta.fecha.monthValue}}/{{consulta.fecha.year}}</td>
-          <td  class="text-center">{{ consulta.medicoOutDto.nombre }} {{ consulta.medicoOutDto.apellidos}}</td>
-          <td  class="text-center">{{ consulta.medicoOutDto.especialidad }}</td>
-          <td  class="text-center">{{ consulta.estado }}</td>
-          <td class="text-center">
+          <td  class="text-center" *ngIf="user_type == 'paciente'">{{ consulta.medicoOutDto.nombre }} {{ consulta.medicoOutDto.apellidos}}</td>
+          <td  class="text-center" *ngIf="user_type == 'medico'">{{ consulta.pacienteOutDto.nombre }} {{ consulta.pacienteOutDto.apellidos}}</td>
+          <td  class="text-center" *ngIf="user_type == 'paciente'">{{ consulta.medicoOutDto.especialidad }}</td>
+          <td  class="text-center" *ngIf="user_type == 'paciente'">{{ consulta.estado }}</td>
+          <td class="text-center" *ngIf="user_type == 'paciente'">
             <button class="details-button">
-              <i class="fas fa-search" (click)="showDetails(consulta)"> Detalles </i>
+              <i class="fas fa-search" (click)="verDetalles(consulta)"> Detalles </i>
+            </button>
+          </td>
+          <td class="text-center" *ngIf="user_type == 'medico'">
+            <button class="details-button">
+              <i class="fas fa-search" (click)="verSolicitud(consulta)"> Ver consulta </i>
             </button>
           </td>
         </tr>

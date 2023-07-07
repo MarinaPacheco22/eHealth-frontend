@@ -12,6 +12,7 @@ import {SolicitudConsultaComponent} from "./components/solicitud-consulta/solici
 import {PerfilComponent} from "./components/perfil/perfil.component";
 import {ConsultasComponent} from "./components/consultas/consultas.component";
 import {ArchivosComponent} from "./components/archivos/archivos.component";
+import {SolicitudDetailsComponent} from "./components/solicitud-details/solicitud-details.component";
 
 const routes: Routes = [
   {path: '', redirectTo: 'main', pathMatch: 'full'},
@@ -26,7 +27,8 @@ const routes: Routes = [
   {path: 'consultas', component: ConsultasComponent},
   {path: 'solicitud-consulta', component: SolicitudConsultaComponent},
   {path: 'perfil', component: PerfilComponent},
-  {path: 'archivos/:consultaId', component: ArchivosComponent}
+  {path: 'archivos/:consultaId', component: ArchivosComponent},
+  {path: 'solicitud-detalles', component: SolicitudDetailsComponent}
 ];
 
 @NgModule({

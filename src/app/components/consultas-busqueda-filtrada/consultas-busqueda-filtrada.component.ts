@@ -1,4 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {RolService} from "../../services/rol.service";
 
 @Component({
   selector: 'app-consultas-busqueda-filtrada',
@@ -7,9 +8,12 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 })
 export class ConsultasBusquedaFiltradaComponent implements OnInit {
 
+  nombre: string = '';
+  apellidos: string = '';
   estado: string = '';
   especialidad: string = '';
   fecha: string = '';
+  user_type: string;
   @Output() searchFiltered = new EventEmitter<any>();
   especialidades: string[] = [
     'Alergología',
@@ -34,13 +38,16 @@ export class ConsultasBusquedaFiltradaComponent implements OnInit {
     'Urología'
   ];
 
-  constructor() { }
+  constructor(public rolService: RolService) { }
 
   ngOnInit(): void {
+    this.user_type = this.rolService.getUserType();
   }
 
   realizarBusqueda() {
     const filtros = {
+      nombre: this.nombre,
+      apellidos: this.apellidos,
       estado: this.estado,
       especialidad: this.especialidad,
       fecha: this.fecha
@@ -49,8 +56,10 @@ export class ConsultasBusquedaFiltradaComponent implements OnInit {
   }
 
   limpiarCampos() {
-    this.estado = null;
-    this.especialidad = null;
-    this.fecha = null;
+    this.nombre = '';
+    this.apellidos = '';
+    this.estado = '';
+    this.especialidad = '';
+    this.fecha = '';
   }
 }
