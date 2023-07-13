@@ -14,7 +14,8 @@ export class PacientesBusquedaFiltradaComponent implements OnInit {
 
   nombre: string = '';
   apellidos: string = '';
-  sexo: string = ''
+  sexo: string = '';
+  fumador: boolean;
 
   @Output() searchFiltered = new EventEmitter<any>();
 
@@ -22,7 +23,8 @@ export class PacientesBusquedaFiltradaComponent implements OnInit {
     const filtros = {
       nombre: this.nombre,
       apellidos: this.apellidos,
-      sexo: this.sexo
+      sexo: this.sexo,
+      fumador: this.fumador
     };
     this.searchFiltered.emit(filtros);
   }
@@ -31,6 +33,7 @@ export class PacientesBusquedaFiltradaComponent implements OnInit {
     this.nombre = '';
     this.apellidos = '';
     this.sexo = '';
+    this.fumador = null;
   }
 
 }

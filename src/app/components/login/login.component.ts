@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
       if (isAdmin) {
         this.rolService.setUserType("admin");
         this.dialogRef.close();
-        return await this.router.navigate(["/admin"]);
+        return await this.router.navigate(["/medicos"], {queryParams: { modo: 'solicitudes' }});
       } else {
         let userFound = false;
         const inputPasswordEncoded = await this.generarHashPassword(password);
@@ -72,7 +72,7 @@ export class LoginComponent implements OnInit {
                   this.rolService.setUserId(response.body.id);
                   this.rolService.setHashPassword(response.body.password);
                   this.dialogRef.close();
-                  return this.router.navigate(['/base']);
+                  return this.router.navigate(['/consultas']);
                 } else {
                   console.log("Contraseña incorrecta.");
                   this.mostrarGenericPopup("Contraseña incorrecta.");
@@ -90,7 +90,7 @@ export class LoginComponent implements OnInit {
               this.rolService.setMedicoAsignadoId(response.body.medicoAsignado);
               this.rolService.setHashPassword(response.body.password);
               this.dialogRef.close();
-              return this.router.navigate(['/base']);
+              return this.router.navigate(['/consultas']);
             } else {
               console.log("Contraseña incorrecta.");
               this.mostrarGenericPopup("Contraseña incorrecta.");

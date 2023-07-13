@@ -23,12 +23,25 @@
     </p>
     <p><strong>Altura: </strong> <span id="altura">{{consulta.pacienteOutDto.altura}} cm</span></p>
     <p><strong>Peso: </strong> <span id="peso">{{consulta.pacienteOutDto.peso}} kg</span></p>
-    <p><strong>Alergias: </strong> <span id="alergias">{{consulta.pacienteOutDto.alergias}}</span></p>
-    <p><strong>Enfermedades diagnosticadas: </strong> <span
-      id="enfermedades">{{consulta.pacienteOutDto.enfermedadesDiagnosticadas}}</span></p>
-    <p><strong>Medicacion actual: </strong> <span
-      id="medicacionActual">{{consulta.pacienteOutDto.medicacionActual}}</span></p>
-    <p><strong>Intervenciones: </strong> <span id="intervenciones">{{consulta.pacienteOutDto.medicacionActual}}</span>
+    <p><strong>Fumador: </strong>
+      <span id="fumadorSi" *ngIf="consulta.pacienteOutDto.fumador">Si</span>
+      <span id="fumadorNo" *ngIf="!consulta.pacienteOutDto.fumador">No</span>
+    </p>
+    <p><strong>Alergias: </strong>
+      <span id="alergiasSi" *ngIf="consulta.pacienteOutDto.alergias.length != 0">{{consulta.pacienteOutDto.alergias}}</span>
+      <span id="alergiasNo" *ngIf="consulta.pacienteOutDto.alergias.length == 0">Ninguna</span>
+    </p>
+    <p><strong>Enfermedades diagnosticadas: </strong>
+      <span id="enfermedadesSi" *ngIf="consulta.pacienteOutDto.enfermedadesDiagnosticadas.length != 0">{{consulta.pacienteOutDto.enfermedadesDiagnosticadas}}</span>
+      <span id="enfermedadesNo" *ngIf="consulta.pacienteOutDto.enfermedadesDiagnosticadas.length == 0">Ninguna</span>
+    </p>
+    <p><strong>Intervenciones: </strong>
+      <span id="intervencionesSi" *ngIf="consulta.pacienteOutDto.intervenciones.length != 0">{{consulta.pacienteOutDto.intervenciones}}</span>
+      <span id="intervencionesNo" *ngIf="consulta.pacienteOutDto.intervenciones.length == 0">Ninguna</span>
+    </p>
+    <p><strong>Medicación actual: </strong>
+      <span id="medicacionSi" *ngIf="consulta.pacienteOutDto.medicacionActual.length != 0">{{consulta.pacienteOutDto.medicacionActual}}</span>
+      <span id="medicacionNo" *ngIf="consulta.pacienteOutDto.medicacionActual.length == 0">Ninguna</span>
     </p>
   </div>
   <div class="info-consulta">

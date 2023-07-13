@@ -74,9 +74,8 @@ export class PacientesComponent implements OnInit {
 
   realizarBusquedaFiltrada(filters: any) {
     if (this.rolService.getUserType() == 'admin') {
-      this.pacientesService.getPacientesFiltrados(filters.nombre, filters.apellidos, filters.sexo).subscribe(
+      this.pacientesService.getPacientesFiltrados(filters.nombre, filters.apellidos, filters.sexo, filters.fumador).subscribe(
         (response) => {
-          console.log(response.body);
           this.pacientesAsignados = response.body;
         },
         (error) => {
@@ -84,9 +83,8 @@ export class PacientesComponent implements OnInit {
         }
       );
     } else {
-      this.pacientesService.getPacientesFiltradosByMedico(filters.nombre, filters.apellidos, filters.sexo, this.rolService.getUserId()).subscribe(
+      this.pacientesService.getPacientesFiltradosByMedico(filters.nombre, filters.apellidos, filters.sexo, this.rolService.getUserId(), filters.fumador).subscribe(
         (response) => {
-          console.log(response.body);
           this.pacientesAsignados = response.body;
         },
         (error) => {

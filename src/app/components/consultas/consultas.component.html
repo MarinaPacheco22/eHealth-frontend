@@ -35,7 +35,7 @@
           <td  class="text-center" *ngIf="user_type == 'paciente'">{{ consulta.medicoOutDto.nombre }} {{ consulta.medicoOutDto.apellidos}}</td>
           <td  class="text-center" *ngIf="user_type == 'medico'">{{ consulta.pacienteOutDto.nombre }} {{ consulta.pacienteOutDto.apellidos}}</td>
           <td  class="text-center" *ngIf="user_type == 'paciente'">{{ consulta.medicoOutDto.especialidad }}</td>
-          <td  class="text-center" *ngIf="user_type == 'paciente'">{{ consulta.estado }}</td>
+          <td  class="text-center" *ngIf="user_type == 'paciente'">{{ estadoConsulta }}</td>
           <td class="text-center" *ngIf="user_type == 'paciente'">
             <button class="details-button">
               <i class="fas fa-search" (click)="verDetalles(consulta)"> Detalles </i>

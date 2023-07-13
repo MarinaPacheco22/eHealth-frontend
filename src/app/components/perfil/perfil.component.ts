@@ -21,6 +21,7 @@ export class PerfilComponent implements OnInit {
   isEditing: boolean = false;
   historialClinico: any;
   showNavBar: boolean = true;
+  strFumador: string = '';
 
   constructor(private pacientesService: PacientesService,
               private rolService: RolService,
@@ -39,9 +40,13 @@ export class PerfilComponent implements OnInit {
         })
       )
       .subscribe((response) => {
-        response.body.fechaNacimiento.monthValue = this.format(response.body.fechaNacimiento.monthValue);
-        response.body.fechaNacimiento.dayOfMonth = this.format(response.body.fechaNacimiento.dayOfMonth);
+        if (response.body.fumador) {
+          this.strFumador = "Si"
+        } else {
+          this.strFumador = "No"
+        }
         this.paciente = response.body;
+        console.log(response.body);
         this.medicosService.getMedicoById(response.body.medicoAsignado)
           .pipe(
             catchError((error) => {
@@ -87,6 +92,8 @@ export class PerfilComponent implements OnInit {
 
   editarPerfil() {
     this.paciente.id = this.paciente_id;
+    this.paciente.fumador = this.strFumador != "No";
+    console.log(this.paciente);
     this.pacientesService.update(this.paciente)
       .pipe(
         catchError((error) => {
@@ -125,14 +132,5 @@ export class PerfilComponent implements OnInit {
 
   back() {
     this.isEditing = false;
-  }
-
-  private format(number: any) {
-    const value = number;
-    if (value < 10) {
-      return '0' + value;
-    } else {
-      return value.toString();
-    }
   }
 }

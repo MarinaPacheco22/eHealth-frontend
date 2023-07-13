@@ -18,6 +18,7 @@ export class ConsultasComponent implements OnInit {
   user_id: number;
   user_type: string;
   noDataMessage: string = "No hay solicitudes para mostrar.";
+  estadoConsulta: string;
 
   constructor(private solicitudService: SolicitudService,
               private rolService: RolService,
@@ -45,6 +46,17 @@ export class ConsultasComponent implements OnInit {
         response.body.forEach((solicitud: any) => {
           solicitud.fecha.monthValue = this.format(solicitud.fecha.monthValue);
           solicitud.fecha.dayOfMonth = this.format(solicitud.fecha.dayOfMonth);
+          switch (solicitud.estado) {
+            case 'SOLICITUD_ENVIADA':
+              this.estadoConsulta = "Solicitud enviada";
+              break;
+            case 'SOLICITUD_CERRADA':
+              this.estadoConsulta = "Solicitud cerrada";
+              break;
+            case 'DERIVACION':
+              this.estadoConsulta = "Solicitud derivada";
+              break;
+          }
         })
         this.consultas = response.body;
       });
