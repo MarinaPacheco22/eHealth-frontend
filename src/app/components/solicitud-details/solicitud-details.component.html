@@ -1,0 +1,49 @@
+<head>
+  <title>Consulta</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        crossorigin="anonymous"/>
+</head>
+<div class="header">
+  <h1>Solicitud de consulta</h1>
+
+  <div class="button-container">
+    <button class="edit-profile-button">Responder</button>
+    <button class="change-password-button">Derivar</button>
+    <button class="back-button">Volver</button>
+  </div>
+</div>
+
+<div class="container">
+  <h3>Informacion del paciente</h3>
+  <div class="info-paciente">
+    <p><strong>Nombre: </strong> <span
+      id="nombre">{{consulta.pacienteOutDto.nombre}} {{consulta.pacienteOutDto.apellidos}}</span></p>
+    <p><strong>Fecha de nacimiento: </strong> <span
+      id="fechaNacimiento">{{consulta.pacienteOutDto.fechaNacimiento.dayOfMonth}}/{{consulta.pacienteOutDto.fechaNacimiento.monthValue}}/{{consulta.pacienteOutDto.fechaNacimiento.year}}</span>
+    </p>
+    <p><strong>Altura: </strong> <span id="altura">{{consulta.pacienteOutDto.altura}} cm</span></p>
+    <p><strong>Peso: </strong> <span id="peso">{{consulta.pacienteOutDto.peso}} kg</span></p>
+    <p><strong>Alergias: </strong> <span id="alergias">{{consulta.pacienteOutDto.alergias}}</span></p>
+    <p><strong>Enfermedades diagnosticadas: </strong> <span
+      id="enfermedades">{{consulta.pacienteOutDto.enfermedadesDiagnosticadas}}</span></p>
+    <p><strong>Medicacion actual: </strong> <span
+      id="medicacionActual">{{consulta.pacienteOutDto.medicacionActual}}</span></p>
+    <p><strong>Intervenciones: </strong> <span id="intervenciones">{{consulta.pacienteOutDto.medicacionActual}}</span>
+    </p>
+  </div>
+  <div class="info-consulta">
+    <h3>Informacion de la consulta</h3>
+    <p><strong>Fecha: </strong> <span id="fecha2">{{consulta.fecha.dayOfMonth}}/{{consulta.fecha.monthValue}}
+      /{{consulta.fecha.year}}</span></p>
+    <p><strong>Descripción: </strong> <span id="descripcion2">{{consulta.descripcion}}</span></p>
+  </div>
+
+  <div class="archivos" *ngIf="anyArchivo">
+    <p><strong>Archivos:</strong></p>
+  </div>
+  <div mat-dialog-actions class="button-container">
+    <div *ngFor="let image of images">
+      <img id="myimage" [src]='image'/>
+    </div>
+  </div>
+</div>
