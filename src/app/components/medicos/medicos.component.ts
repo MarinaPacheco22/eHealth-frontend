@@ -5,6 +5,8 @@ import {MedicosService} from "../../services/medicos.service";
 import {MatDialog} from "@angular/material/dialog";
 import {MedicoDetailsPopupComponent} from "../medico-details-popup/medico-details-popup.component";
 import {ActivatedRoute} from "@angular/router";
+import {OrderByPipe} from "../../pipes/orderby.pipe";
+import {Medico} from "../../model/medico.model";
 
 @Component({
   selector: 'app-medicos',
@@ -22,7 +24,8 @@ export class MedicosComponent implements OnInit {
     private medicosService: MedicosService,
     private rolService: RolService,
     private dialog: MatDialog,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private orderByPipe: OrderByPipe
   ) {
   }
 
@@ -41,7 +44,10 @@ export class MedicosComponent implements OnInit {
           })
         )
         .subscribe(response => {
-          console.log(response.body);
+          this.medicos.forEach((medico: any) => {
+            const fechaNacimiento = medico.fechaNacimiento.dayOfMonth + "-" + medico.fechaNacimiento.monthValue + "-" + medico.fechaNacimiento.year;
+            medico.fechaNacimiento = this.formatearFecha(fechaNacimiento);
+          })
           this.medicos = response.body;
         });
 
@@ -82,15 +88,22 @@ export class MedicosComponent implements OnInit {
     return this.medicos.length == 0;
   }
 
-
   realizarBusquedaFiltrada(filters: any) {
     this.medicosService.getMedicosFiltrados(filters.nombre, filters.apellidos, filters.especialidad, filters.activo).subscribe(
       (response) => {
-        this.medicos = response.body;
+        this.medicos = this.orderByPipe.transform(response.body, filters.orderBy);
       },
       (error) => {
         console.error(error);
       }
     );
   }
+
+  formatearFecha(fecha: string) {
+    const [day, month, year] = fecha.split('-');
+    const diaConCeros = day.padStart(2, '0');
+    const mesConCeros = month.padStart(2, '0');
+    return `${diaConCeros}-${mesConCeros}-${year}`;
+  }
+
 }

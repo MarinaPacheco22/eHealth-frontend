@@ -1,3 +1,11 @@
-<div *ngFor="let image of images">
-  <img id="myimage" [src]='image'/>
+<div *ngFor="let file of files">
+  <ng-container *ngIf="isImage(file)">
+    <img [src]="file" width="320" height="240" />
+  </ng-container>
+  <ng-container *ngIf="isVideo(file)">
+    <video width="90%" height="90%" controls>
+      <source [src]="file" type="video/mp4">
+      Tu navegador no admite el elemento de video.
+    </video>
+  </ng-container>
 </div>

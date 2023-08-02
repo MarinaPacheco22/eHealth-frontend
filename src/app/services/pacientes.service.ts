@@ -20,7 +20,7 @@ export class PacientesService {
     });
   }
 
-  getPacientesFiltrados(nombre: string, apellidos: string, sexo: any, fumador: boolean) {
+  getPacientesFiltrados(nombre: string, apellidos: string, sexo: any, fumador: any) {
     const filter = "nombre:" + nombre + ",apellidos:" + apellidos + ",sexo:" + sexo + ",fumador:" + fumador;
     return this.http.get<any>(this.API_ENDPOINT + "/paciente/filter?filter=" + filter, {
       params: undefined,
@@ -28,7 +28,7 @@ export class PacientesService {
     })
   }
 
-  getPacientesFiltradosByMedico(nombre: string, apellidos: string, sexo: any, medicoAsignadoId: any, fumador: boolean) {
+  getPacientesFiltradosByMedico(nombre: string, apellidos: string, sexo: any, medicoAsignadoId: any, fumador: any) {
     const filter = "nombre:" + nombre + ",apellidos:" + apellidos + ",sexo:" + sexo + ",medicoAsignado.id:" + medicoAsignadoId + ",fumador:" + fumador;
     return this.http.get<any>(this.API_ENDPOINT + "/paciente/filter?filter=" + filter, {
       params: undefined,

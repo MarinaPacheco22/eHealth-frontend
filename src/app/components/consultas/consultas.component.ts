@@ -14,26 +14,21 @@ import {MatDialog} from "@angular/material/dialog";
 export class ConsultasComponent implements OnInit {
 
   showNavBar: boolean = true;
-  consultas: any;
+  consultas: any = [];
   user_id: number;
   user_type: string;
   noDataMessage: string = "No hay solicitudes para mostrar.";
-  estadoConsulta: string;
 
   constructor(private solicitudService: SolicitudService,
               private rolService: RolService,
               private dialog: MatDialog,
               private router: Router) {
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        this.ngOnInit();
-      }
-    });
   }
 
   ngOnInit(): void {
     this.user_id = Number(this.rolService.getUserId());
     this.user_type = this.rolService.getUserType();
+    console.log(this.user_type);
     if (this.user_type == 'paciente') {
       this.solicitudService.getSolicitudesByPaciente(this.user_id)
         .pipe(
@@ -42,23 +37,24 @@ export class ConsultasComponent implements OnInit {
             return throwError(error);
           })
         ).subscribe((response) => {
-        console.log(response.body);
+        this.consultas = [];
         response.body.forEach((solicitud: any) => {
           solicitud.fecha.monthValue = this.format(solicitud.fecha.monthValue);
           solicitud.fecha.dayOfMonth = this.format(solicitud.fecha.dayOfMonth);
           switch (solicitud.estado) {
             case 'SOLICITUD_ENVIADA':
-              this.estadoConsulta = "Solicitud enviada";
+              solicitud.estado = "Solicitud enviada";
               break;
             case 'SOLICITUD_CERRADA':
-              this.estadoConsulta = "Solicitud cerrada";
+              solicitud.estado = "Solicitud cerrada";
               break;
             case 'DERIVACION':
-              this.estadoConsulta = "Solicitud derivada";
+              solicitud.estado = "Solicitud derivada";
               break;
           }
+          this.consultas.push(solicitud);
         })
-        this.consultas = response.body;
+        console.log(this.consultas);
       });
     } else {
       this.solicitudService.getSolicitudesByMedico(this.user_id)
@@ -68,18 +64,31 @@ export class ConsultasComponent implements OnInit {
             return throwError(error);
           })
         ).subscribe((response) => {
-        console.log(response.body);
+        this.consultas = [];
         response.body.forEach((solicitud: any) => {
           solicitud.fecha.monthValue = this.format(solicitud.fecha.monthValue);
           solicitud.fecha.dayOfMonth = this.format(solicitud.fecha.dayOfMonth);
+          switch (solicitud.estado) {
+            case 'SOLICITUD_ENVIADA':
+              solicitud.estado = "Solicitud enviada";
+              break;
+            case 'SOLICITUD_CERRADA':
+              solicitud.estado = "Solicitud cerrada";
+              break;
+            case 'DERIVACION':
+              solicitud.estado = "Solicitud derivada";
+              break;
+          }
+          this.consultas.push(solicitud);
         })
-        this.consultas = response.body;
+        console.log(this.consultas);
       });
     }
   }
 
   nuevaSolicitud() {
     this.router.navigate([('/solicitud-consulta')]);
+
   }
 
   verDetalles(consulta: any) {
@@ -101,31 +110,52 @@ export class ConsultasComponent implements OnInit {
     if (this.user_type == 'paciente') {
       this.solicitudService.getSolicitudesFiltradasByPaciente(this.user_id, filters.estado, filters.especialidad, filters.fecha).subscribe(
         (response) => {
-          console.log(response.body);
           if (response.body != null) {
+            this.consultas = [];
             response.body.forEach((solicitud: any) => {
               solicitud.fecha.monthValue = this.format(solicitud.fecha.monthValue);
               solicitud.fecha.dayOfMonth = this.format(solicitud.fecha.dayOfMonth);
+              switch (solicitud.estado) {
+                case 'SOLICITUD_ENVIADA':
+                  solicitud.estado = "Solicitud enviada";
+                  break;
+                case 'SOLICITUD_CERRADA':
+                  solicitud.estado = "Solicitud cerrada";
+                  break;
+                case 'DERIVACION':
+                  solicitud.estado = "Solicitud derivada";
+                  break;
+              }
+              this.consultas.push(solicitud);
             })
           }
-          this.consultas = response.body;
         },
         (error) => {
           console.error(error);
         }
       );
     } else {
-      this.solicitudService.getSolicitudesFiltradasByMedico(this.user_id, filters.nombre, filters.apellidos, filters.fecha).subscribe(
+      this.solicitudService.getSolicitudesAbiertasFiltradasByMedico(this.user_id, filters.nombre, filters.apellidos, filters.fecha).subscribe(
         (response) => {
-          console.log(response.body);
           if (response.body != null) {
+            this.consultas = [];
             response.body.forEach((solicitud: any) => {
-              console.log(solicitud.fecha);
               solicitud.fecha.monthValue = this.format(solicitud.fecha.monthValue);
               solicitud.fecha.dayOfMonth = this.format(solicitud.fecha.dayOfMonth);
+              switch (solicitud.estado) {
+                case 'SOLICITUD_ENVIADA':
+                  solicitud.estado = "Solicitud enviada";
+                  break;
+                case 'SOLICITUD_CERRADA':
+                  solicitud.estado = "Solicitud cerrada";
+                  break;
+                case 'DERIVACION':
+                  solicitud.estado = "Solicitud derivada";
+                  break;
+              }
+              this.consultas.push(solicitud);
             })
           }
-          this.consultas = response.body;
         },
         (error) => {
           console.error(error);
@@ -141,5 +171,9 @@ export class ConsultasComponent implements OnInit {
     } else {
       return value.toString();
     }
+  }
+
+  verResolucion(consulta: any) {
+
   }
 }

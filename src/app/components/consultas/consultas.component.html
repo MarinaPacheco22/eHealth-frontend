@@ -13,7 +13,7 @@
 <div class="row">
   <div class="col-md-12">
     <div class="button-container">
-      <button class="add-button" (click)="nuevaSolicitud()">Nueva Solicitud</button>
+      <button class="add-button" *ngIf="user_type == 'paciente'" (click)="nuevaSolicitud()">Nueva Solicitud</button>
     </div>
     <div id="table-container" *ngIf="consultas; else noData">
       <table id="medicos-table" class="table table-hover">
@@ -31,13 +31,13 @@
         <tbody>
         <tr *ngFor="let consulta of consultas">
           <td></td>
-          <td  class="text-center">{{consulta.fecha.dayOfMonth}}/{{consulta.fecha.monthValue}}/{{consulta.fecha.year}}</td>
+          <td  class="text-center">{{consulta.fecha.dayOfMonth}}-{{consulta.fecha.monthValue}}-{{consulta.fecha.year}}</td>
           <td  class="text-center" *ngIf="user_type == 'paciente'">{{ consulta.medicoOutDto.nombre }} {{ consulta.medicoOutDto.apellidos}}</td>
           <td  class="text-center" *ngIf="user_type == 'medico'">{{ consulta.pacienteOutDto.nombre }} {{ consulta.pacienteOutDto.apellidos}}</td>
           <td  class="text-center" *ngIf="user_type == 'paciente'">{{ consulta.medicoOutDto.especialidad }}</td>
-          <td  class="text-center" *ngIf="user_type == 'paciente'">{{ estadoConsulta }}</td>
+          <td  class="text-center" *ngIf="user_type == 'paciente'">{{ consulta.estado }}</td>
           <td class="text-center" *ngIf="user_type == 'paciente'">
-            <button class="details-button">
+            <button class="details-button" [ngClass]="{'closed-state': consulta.estado === 'Solicitud cerrada'}">
               <i class="fas fa-search" (click)="verDetalles(consulta)"> Detalles </i>
             </button>
           </td>

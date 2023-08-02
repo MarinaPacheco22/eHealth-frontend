@@ -19,6 +19,11 @@
       <option value="false">No</option>
     </select>
 
+    <label for="orderBy">Ordenar por:</label>
+    <select id="orderBy" [(ngModel)]="orderBy">
+      <option *ngFor="let opcion of opcionesOrdenar" [value]="opcion.valor">{{ opcion.nombre }}</option>
+    </select>
+
     <button class="search" (click)="realizarBusqueda()">Buscar</button>
     <button (click)="limpiarCampos()">Limpiar</button>
   </div>

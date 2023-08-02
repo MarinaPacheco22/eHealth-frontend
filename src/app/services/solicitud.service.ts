@@ -27,8 +27,8 @@ export class SolicitudService {
     })
   }
 
-  getSolicitudesFiltradasByMedico(id: number, nombre: any, apellidos: any, fecha: any) {
-    const filter = "paciente.nombre:" + nombre + ",paciente.apellidos:" + apellidos + ",fecha:" + fecha + ",medico.id:" + id;
+  getSolicitudesAbiertasFiltradasByMedico(id: number, nombre: any, apellidos: any, fecha: any) {
+    const filter = "paciente.nombre:" + nombre + ",paciente.apellidos:" + apellidos + ",fecha:" + fecha + ",medico.id:" + id + ",estado=SOLICITUD_ENVIADA";
     return this.http.get<any>(this.API_ENDPOINT + "/solicitud-consulta/filter?filter=" + filter, {
       params: undefined,
       observe: "response"
@@ -54,5 +54,12 @@ export class SolicitudService {
       params: undefined,
       observe: 'response'
     });
+  }
+
+  changeState(solicitudId: number, estado: number) {
+    return this.http.put<any>(this.API_ENDPOINT + "/solicitud-consulta/update-state/" + solicitudId + "/" + estado, {
+      params: undefined,
+      observe: 'response'
+    })
   }
 }

@@ -45,6 +45,17 @@
   position: sticky;
 }
 
+.closed-state {
+  background-color: mediumpurple;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  margin-right: 20px;
+  border-radius: 10px;
+  position: sticky;
+}
+
 
 #table-container {
   margin-top: 50px;

@@ -1,0 +1,40 @@
+<h1 mat-dialog-title><b>Resolución de consulta</b></h1>
+<div mat-dialog-content>
+  <label for="diagnostico">Diagnóstico:</label>
+  <textarea type="string" id="diagnostico" [(ngModel)]="resolucion.diagnostico" required class="form-control"></textarea>
+
+  <label for="tratamiento">Tratamiento:</label>
+  <textarea type="string" id="tratamiento" [(ngModel)]="resolucion.tratamiento" required class="form-control"></textarea>
+
+  <label for="estado">Estado:</label>
+  <select id="estado" [(ngModel)]="solicitud.estado" class="form-control">
+    <option [defaultSelected]="0" value="0">Solicitud recibida</option>
+    <option value="1">Solicitud cerrada</option>
+    <option value="2">Solicitud derivada</option>
+  </select>
+
+  <div *ngIf="modificarHistorialActivo">
+    <label for="medicacion">Medicación:</label>
+    <input type="text" id="medicacion" [(ngModel)]="resolucion.medicacion" class="form-control">
+  </div>
+
+  <div *ngIf="modificarHistorialActivo">
+    <label for="enfermedad">Enfermedad diagnosticada:</label>
+    <input type="text" id="enfermedad" [(ngModel)]="resolucion.enfermedad" class="form-control">
+  </div>
+
+  <div *ngIf="modificarHistorialActivo">
+    <label for="alergia">Alergia:</label>
+    <input type="text" id="alergia" [(ngModel)]="resolucion.alergia" class="form-control">
+  </div>
+</div>
+
+
+<div mat-dialog-actions>
+  <button mat-raised-button color="accent" (click)="alternarCamposHistorial()">
+    {{ modificarHistorialActivo ? 'No modificar' : 'Modificar datos clínicos del paciente' }}
+  </button>
+  <button mat-raised-button color="primary" (click)="enviar()">Enviar</button>
+  <button mat-button mat-dialog-close="">Cerrar</button>
+</div>
+

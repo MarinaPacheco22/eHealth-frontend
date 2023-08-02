@@ -21,7 +21,7 @@ export class MedicosService {
     });
   }
 
-  getMedicosFiltrados(nombre: string, apellidos: string, especialidad: any, activo: boolean) {
+  getMedicosFiltrados(nombre: string, apellidos: string, especialidad: any, activo: any) {
     const filter = "nombre:" + nombre + ",apellidos:" + apellidos + ",especialidad:" + especialidad + ",activo:" + activo;
     return this.http.get<any>(this.API_ENDPOINT + "/medico/filter?filter=" + filter, {
       params: undefined,

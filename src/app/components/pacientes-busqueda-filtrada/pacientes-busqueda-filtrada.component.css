@@ -22,7 +22,7 @@
 
 .filtered-search-container select,
 .filtered-search-container input[type="date"] {
-  width: 200px;
+  width: 150px;
 }
 
 .filtered-search-container button {

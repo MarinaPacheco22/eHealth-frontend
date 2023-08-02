@@ -45,8 +45,8 @@ export class PerfilComponent implements OnInit {
         } else {
           this.strFumador = "No"
         }
+        response.body.fechaNacimiento = this.formatearFecha(response.body.fechaNacimiento);
         this.paciente = response.body;
-        console.log(response.body);
         this.medicosService.getMedicoById(response.body.medicoAsignado)
           .pipe(
             catchError((error) => {
@@ -93,7 +93,6 @@ export class PerfilComponent implements OnInit {
   editarPerfil() {
     this.paciente.id = this.paciente_id;
     this.paciente.fumador = this.strFumador != "No";
-    console.log(this.paciente);
     this.pacientesService.update(this.paciente)
       .pipe(
         catchError((error) => {
@@ -132,5 +131,12 @@ export class PerfilComponent implements OnInit {
 
   back() {
     this.isEditing = false;
+  }
+
+  formatearFecha(fecha: string) {
+    const [day, month, year] = fecha.split('-');
+    const diaConCeros = day.padStart(2, '0');
+    const mesConCeros = month.padStart(2, '0');
+    return `${diaConCeros}-${mesConCeros}-${year}`;
   }
 }

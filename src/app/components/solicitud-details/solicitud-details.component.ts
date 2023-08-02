@@ -1,10 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {GenericPopupComponent} from "../generic-popup/generic-popup.component";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {catchError, throwError} from "rxjs";
 import {SolicitudService} from "../../services/solicitud.service";
 import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
+import {MedicoDetailsPopupComponent} from "../medico-details-popup/medico-details-popup.component";
+import {ResponsePopupComponent} from "../response-popup/response-popup.component";
 
 @Component({
   selector: 'app-solicitud-details',
@@ -20,12 +22,15 @@ export class SolicitudDetailsComponent implements OnInit {
   constructor(private dialog: MatDialog,
               private route: ActivatedRoute,
               private solicitudService: SolicitudService,
-              private sanitizer: DomSanitizer) {
+              private sanitizer: DomSanitizer,
+              private router: Router) {
   }
 
   ngOnInit(): void {
     const consultaParam = this.route.snapshot.paramMap.get('consulta');
-    this.consulta = JSON.parse(consultaParam);
+    let consulta = JSON.parse(consultaParam);
+    consulta.pacienteOutDto.fechaNacimiento = this.formatearFecha(consulta.pacienteOutDto.fechaNacimiento);
+    this.consulta = consulta;
     this.anyArchivo = this.consulta.numArchivos != 0;
     if (this.anyArchivo) {
       this.solicitudService.getArchivosBySolicitudId(this.consulta.id)
@@ -59,4 +64,29 @@ export class SolicitudDetailsComponent implements OnInit {
     });
   }
 
+  responder() {
+    this.dialog.open(ResponsePopupComponent, {
+      panelClass: 'dialog-center',
+      data: this.consulta
+    });
+  }
+
+  derivar() {
+
+  }
+
+  solicitarPrueba() {
+
+  }
+
+  back() {
+    this.router.navigate(['/consultas']);
+  }
+
+  formatearFecha(fecha: string) {
+    const [day, month, year] = fecha.split('-');
+    const diaConCeros = day.padStart(2, '0');
+    const mesConCeros = month.padStart(2, '0');
+    return `${diaConCeros}-${mesConCeros}-${year}`;
+  }
 }

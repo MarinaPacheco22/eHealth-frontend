@@ -7,17 +7,14 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 })
 export class MedicosBusquedaFiltradaComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
   nombre: string = '';
   apellidos: string = '';
   especialidad: string = '';
-  activo: boolean;
+  activo: string = '';
+  orderBy: string = '';
 
   @Output() searchFiltered = new EventEmitter<any>();
+
   especialidades: string[] = [
     'Alergología',
     'Cardiología',
@@ -41,12 +38,26 @@ export class MedicosBusquedaFiltradaComponent implements OnInit {
     'Urología'
   ];
 
+  opcionesOrdenar = [
+    { valor: '', nombre: '' },
+    { valor: 'nombre', nombre: 'Nombre' },
+    { valor: 'apellidos', nombre: 'Apellidos' },
+    { valor: 'especialidad', nombre: 'Especialidad' },
+  ];
+
+  constructor() {}
+
+  ngOnInit(): void {
+  }
+
+
   realizarBusqueda() {
     const filtros = {
       nombre: this.nombre,
       apellidos: this.apellidos,
       especialidad: this.especialidad,
-      activo: this.activo
+      activo: this.activo,
+      orderBy: this.orderBy
     };
     this.searchFiltered.emit(filtros);
   }
@@ -55,7 +66,8 @@ export class MedicosBusquedaFiltradaComponent implements OnInit {
     this.nombre = '';
     this.apellidos = '';
     this.especialidad = '';
-    this.activo = null;
+    this.activo = '';
+    this.orderBy = '';
   }
 
 }

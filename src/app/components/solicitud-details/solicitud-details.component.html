@@ -7,9 +7,10 @@
   <h1>Solicitud de consulta</h1>
 
   <div class="button-container">
-    <button class="edit-profile-button">Responder</button>
-    <button class="change-password-button">Derivar</button>
-    <button class="back-button">Volver</button>
+    <button class="edit-profile-button" (click)="responder()">Responder</button>
+    <button class="change-password-button" (click)="derivar()">Derivar</button>
+    <button class="request-test" (click)="solicitarPrueba()">Solicitar prueba</button>
+    <button class="back-button" (click)="back()">Volver</button>
   </div>
 </div>
 
@@ -19,7 +20,7 @@
     <p><strong>Nombre: </strong> <span
       id="nombre">{{consulta.pacienteOutDto.nombre}} {{consulta.pacienteOutDto.apellidos}}</span></p>
     <p><strong>Fecha de nacimiento: </strong> <span
-      id="fechaNacimiento">{{consulta.pacienteOutDto.fechaNacimiento.dayOfMonth}}/{{consulta.pacienteOutDto.fechaNacimiento.monthValue}}/{{consulta.pacienteOutDto.fechaNacimiento.year}}</span>
+      id="fechaNacimiento">{{consulta.pacienteOutDto.fechaNacimiento}}</span>
     </p>
     <p><strong>Altura: </strong> <span id="altura">{{consulta.pacienteOutDto.altura}} cm</span></p>
     <p><strong>Peso: </strong> <span id="peso">{{consulta.pacienteOutDto.peso}} kg</span></p>
@@ -46,8 +47,7 @@
   </div>
   <div class="info-consulta">
     <h3>Informacion de la consulta</h3>
-    <p><strong>Fecha: </strong> <span id="fecha2">{{consulta.fecha.dayOfMonth}}/{{consulta.fecha.monthValue}}
-      /{{consulta.fecha.year}}</span></p>
+    <p><strong>Fecha: </strong> <span id="fecha2">{{consulta.fecha.dayOfMonth}}-{{consulta.fecha.monthValue}}-{{consulta.fecha.year}}</span></p>
     <p><strong>Descripción: </strong> <span id="descripcion2">{{consulta.descripcion}}</span></p>
   </div>
 

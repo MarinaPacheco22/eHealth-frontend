@@ -14,7 +14,7 @@
       <textarea id="dolencia" name="dolencia" [(ngModel)]="solicitud.descripcion" required class="form-control"></textarea>
     </div>
     <div class="form-group">
-      <span>Adjuntar archivos: </span>
+      <span>Adjuntar archivos: ({{ filesSize() }} MB/100MB) </span>
       <input type="file" id="adjuntos" name="adjuntos" #adjuntosInput multiple accept="image/*, video/*"
              class="form-control-file" (change)="adjuntosSeleccionados(adjuntosInput.files)" style="color: transparent;">
     </div>

@@ -1,0 +1,12 @@
+input, label, textarea, select {
+  display: block;
+  margin-bottom: 10px;
+  width: 400px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+

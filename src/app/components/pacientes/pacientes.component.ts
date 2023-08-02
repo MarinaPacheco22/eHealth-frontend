@@ -6,6 +6,7 @@ import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {HistorialClinicoPopupComponent} from "../historial-clinico-popup/historial-clinico-popup.component";
 import {GenericPopupComponent} from "../generic-popup/generic-popup.component";
+import {OrderByPipe} from "../../pipes/orderby.pipe";
 
 @Component({
   selector: 'app-pacientes',
@@ -22,7 +23,8 @@ export class PacientesComponent implements OnInit {
     private pacientesService: PacientesService,
     private rolService: RolService,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private orderByPipe: OrderByPipe
   ) {
   }
 
@@ -76,7 +78,7 @@ export class PacientesComponent implements OnInit {
     if (this.rolService.getUserType() == 'admin') {
       this.pacientesService.getPacientesFiltrados(filters.nombre, filters.apellidos, filters.sexo, filters.fumador).subscribe(
         (response) => {
-          this.pacientesAsignados = response.body;
+          this.pacientesAsignados = this.orderByPipe.transform(response.body, filters.orderBy);
         },
         (error) => {
           console.error(error);
@@ -85,7 +87,7 @@ export class PacientesComponent implements OnInit {
     } else {
       this.pacientesService.getPacientesFiltradosByMedico(filters.nombre, filters.apellidos, filters.sexo, this.rolService.getUserId(), filters.fumador).subscribe(
         (response) => {
-          this.pacientesAsignados = response.body;
+          this.pacientesAsignados = this.orderByPipe.transform(response.body, filters.orderBy);
         },
         (error) => {
           console.error(error);

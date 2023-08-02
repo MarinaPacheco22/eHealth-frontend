@@ -27,26 +27,30 @@ export class SolicitudConsultaComponent {
 
   enviarSolicitud() {
     if (this.solicitud.descripcion == null || this.solicitud.descripcion == '') {
-      this.mostrarGenericPopup("Por favor, complete el campo de descripcion de dolencias.")
+      this.mostrarErrorPopup("Por favor, complete el campo de descripcion de dolencias.")
     } else {
       const formDataSolicitud = new FormData();
       formDataSolicitud.append('descripcion', this.solicitud.descripcion);
       formDataSolicitud.append('pacienteId', this.rolService.getUserId());
       formDataSolicitud.append('medicoId', this.rolService.getMedicoAsignadoId());
 
+      let totalSize = 0;
       for (let i = 0; i < this.adjuntos.length; i++) {
         let archivo = this.adjuntos[i];
+        totalSize = totalSize + archivo.size;
         formDataSolicitud.append('archivos', archivo);
       }
-      formDataSolicitud.forEach(function(value, key) {
-        console.log(key + ': ' + value);
-      });
-      try {
-        this.solicitudService.createSolicitud(formDataSolicitud);
-        this.router.navigate(['/consultas']);
-        this.mostrarGenericPopup("Solicitud de consulta enviada correctamente.");
-      } catch (e) {
-        this.mostrarGenericPopup("Ha ocurrido un error al enviar la solicitud de consulta.");
+
+      if (totalSize > 104857600) {
+        this.mostrarErrorPopup("El tamaño de los archivos excede el límite.");
+      } else {
+        try {
+          this.solicitudService.createSolicitud(formDataSolicitud);
+          this.router.navigate(['/consultas']);
+          this.mostrarGenericPopup("Solicitud de consulta enviada correctamente.");
+        } catch (e) {
+          this.mostrarErrorPopup("Ha ocurrido un error al enviar la solicitud de consulta.");
+        }
       }
     }
 
@@ -84,5 +88,21 @@ export class SolicitudConsultaComponent {
     dialogRef.afterClosed().subscribe(() => {
       location.reload();
     })
+  }
+
+  mostrarErrorPopup(mensaje: string): void {
+    this.dialog.open(GenericPopupComponent, {
+      width: '300px',
+      data: {message: mensaje}
+    });
+  }
+
+  filesSize() {
+    let totalSize = 0;
+    for (let i = 0; i < this.adjuntos.length; i++) {
+      let archivo = this.adjuntos[i];
+      totalSize = totalSize + archivo.size;
+    }
+    return ((totalSize/1024)/1024).toFixed(2);
   }
 }

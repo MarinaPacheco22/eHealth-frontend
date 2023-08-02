@@ -7,24 +7,37 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 })
 export class PacientesBusquedaFiltradaComponent implements OnInit {
 
+  nombre: string = '';
+  apellidos: string = '';
+  sexo: string = '';
+  fumador: string = '';
+  orderBy: string = '';
+
+  ordenAscendente = true;
+
+  @Output() searchFiltered = new EventEmitter<any>();
+
+  opcionesOrdenar = [
+    { valor: '', nombre: '' },
+    { valor: 'nombre', nombre: 'Nombre' },
+    { valor: 'apellidos', nombre: 'Apellidos' },
+    { valor: 'fechaNacimiento', nombre: 'Fecha de nacimiento' },
+    { valor: 'altura', nombre: 'Altura' },
+    { valor: 'peso', nombre: 'Peso' }
+  ];
+
   constructor() { }
 
   ngOnInit(): void {
   }
-
-  nombre: string = '';
-  apellidos: string = '';
-  sexo: string = '';
-  fumador: boolean;
-
-  @Output() searchFiltered = new EventEmitter<any>();
 
   realizarBusqueda() {
     const filtros = {
       nombre: this.nombre,
       apellidos: this.apellidos,
       sexo: this.sexo,
-      fumador: this.fumador
+      fumador: this.fumador,
+      orderBy: this.orderBy
     };
     this.searchFiltered.emit(filtros);
   }
@@ -33,7 +46,12 @@ export class PacientesBusquedaFiltradaComponent implements OnInit {
     this.nombre = '';
     this.apellidos = '';
     this.sexo = '';
-    this.fumador = null;
+    this.fumador = '';
+    this.orderBy = '';
+  }
+
+  toggleOrden() {
+    this.ordenAscendente = !this.ordenAscendente;
   }
 
 }

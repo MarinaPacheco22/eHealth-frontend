@@ -1,3 +1,9 @@
+<head>
+  <title>Búsqueda filtrada</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        crossorigin="anonymous"/>
+</head>
+<body>
 <div class="container">
   <div class="filtered-search-container">
     <label for="nombre">Nombre:</label>
@@ -20,7 +26,15 @@
       <option value="false">No</option>
     </select>
 
+    <label for="orderBy">Ordenar por:</label>
+    <select id="orderBy" [(ngModel)]="orderBy">
+      <option *ngFor="let opcion of opcionesOrdenar" [value]="opcion.valor">{{ opcion.nombre }}</option>
+    </select>
+
+    <i *ngIf="orderBy != ''" [ngClass]="{'fas fa-arrow-up': ordenAscendente, 'fas fa-arrow-down': !ordenAscendente}" (click)="toggleOrden()"></i>
+
     <button class="search" (click)="realizarBusqueda()">Buscar</button>
     <button (click)="limpiarCampos()">Limpiar</button>
   </div>
 </div>
+</body>

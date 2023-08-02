@@ -14,7 +14,7 @@ import {ActivatedRoute} from "@angular/router";
 export class ArchivosComponent implements OnInit {
 
   consultaId: number;
-  images: SafeUrl[] = [];
+  files: SafeUrl[] = [];
 
 
   constructor(private solicitudService: SolicitudService,
@@ -33,14 +33,20 @@ export class ArchivosComponent implements OnInit {
           })
         )
         .subscribe((response) => {
+          console.log(response.body);
           if (response.body == null) {
             this.mostrarGenericPopup("No hay archivos incluidos en esta solicitud.")
           } else {
             response.body.forEach((entry: any) => {
-              const bytes = entry.archivo.bytes;
-              let objectURL = 'data:image/jpeg;base64,' + bytes;
-              let image = this.sanitizer.bypassSecurityTrustUrl(objectURL);
-              this.images.push(image);
+              const bytes = entry.bytes;
+              let objectURL;
+              if (entry.tipoContenido == 'video/mp4') {
+                objectURL = 'data:video/mp4;base64,' + bytes;
+              } else {
+                objectURL = 'data:image/jpeg;base64,' + bytes;
+              }
+              let file = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+              this.files.push(file);
             })
 
           }
@@ -55,5 +61,14 @@ export class ArchivosComponent implements OnInit {
       data: {message: mensaje}
     });
   }
+
+  isImage(file: SafeUrl): boolean {
+    return file.toString().includes('data:image');
+  }
+
+  isVideo(file: SafeUrl): boolean {
+    return file.toString().includes('data:video');
+  }
+
 
 }
