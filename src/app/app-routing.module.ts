@@ -13,6 +13,7 @@ import {PerfilComponent} from "./components/perfil/perfil.component";
 import {ConsultasComponent} from "./components/consultas/consultas.component";
 import {ArchivosComponent} from "./components/archivos/archivos.component";
 import {SolicitudDetailsComponent} from "./components/solicitud-details/solicitud-details.component";
+import {PruebasComponent} from "./components/pruebas/pruebas.component";
 
 const routes: Routes = [
   {path: '', redirectTo: 'main', pathMatch: 'full'},
@@ -28,7 +29,8 @@ const routes: Routes = [
   {path: 'solicitud-consulta', component: SolicitudConsultaComponent},
   {path: 'perfil', component: PerfilComponent},
   {path: 'archivos/:consultaId', component: ArchivosComponent},
-  {path: 'solicitud-detalles', component: SolicitudDetailsComponent}
+  {path: 'solicitud-detalles', component: SolicitudDetailsComponent},
+  {path: 'pruebas', component: PruebasComponent}
 ];
 
 @NgModule({

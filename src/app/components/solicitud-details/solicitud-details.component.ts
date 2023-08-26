@@ -5,8 +5,9 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {catchError, throwError} from "rxjs";
 import {SolicitudService} from "../../services/solicitud.service";
 import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
-import {MedicoDetailsPopupComponent} from "../medico-details-popup/medico-details-popup.component";
 import {ResponsePopupComponent} from "../response-popup/response-popup.component";
+import {SolicitarPruebaPopupComponent} from "../solicitar-prueba-popup/solicitar-prueba-popup.component";
+import {PruebaMedicaService} from "../../services/prueba-medica.service";
 
 @Component({
   selector: 'app-solicitud-details',
@@ -17,11 +18,13 @@ export class SolicitudDetailsComponent implements OnInit {
 
   consulta: any;
   anyArchivo: boolean;
-  images: SafeUrl[] = [];
+  pruebas: any;
+  files: SafeUrl[] = [];
 
   constructor(private dialog: MatDialog,
               private route: ActivatedRoute,
               private solicitudService: SolicitudService,
+              private pruebasService: PruebaMedicaService,
               private sanitizer: DomSanitizer,
               private router: Router) {
   }
@@ -29,6 +32,7 @@ export class SolicitudDetailsComponent implements OnInit {
   ngOnInit(): void {
     const consultaParam = this.route.snapshot.paramMap.get('consulta');
     let consulta = JSON.parse(consultaParam);
+    console.log(consulta);
     consulta.pacienteOutDto.fechaNacimiento = this.formatearFecha(consulta.pacienteOutDto.fechaNacimiento);
     this.consulta = consulta;
     this.anyArchivo = this.consulta.numArchivos != 0;
@@ -45,14 +49,25 @@ export class SolicitudDetailsComponent implements OnInit {
             this.mostrarGenericPopup("No hay archivos incluidos en esta solicitud.")
           } else {
             response.body.forEach((entry: any) => {
-              const bytes = entry.archivo.bytes;
-              let objectURL = 'data:image/jpeg;base64,' + bytes;
-              let image = this.sanitizer.bypassSecurityTrustUrl(objectURL);
-              this.images.push(image);
+              const bytes = entry.bytes;
+              let objectURL;
+              if (entry.tipoContenido == 'video/mp4') {
+                objectURL = 'data:video/mp4;base64,' + bytes;
+              } else {
+                objectURL = 'data:image/jpeg;base64,' + bytes;
+              }
+              let file = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+              this.files.push(file);
             })
 
           }
         })
+    }
+    if (consulta.pruebasBoolean) {
+      this.pruebasService.getPruebasBySolicitudId(consulta.id).subscribe((response) => {
+        console.log(response.body);
+        this.pruebas = response.body;
+      })
     }
   }
 
@@ -67,16 +82,30 @@ export class SolicitudDetailsComponent implements OnInit {
   responder() {
     this.dialog.open(ResponsePopupComponent, {
       panelClass: 'dialog-center',
-      data: this.consulta
+      data: {
+        consulta: this.consulta,
+        tipo: "RESPUESTA"
+      }
     });
   }
 
   derivar() {
-
+    this.dialog.open(ResponsePopupComponent, {
+      panelClass: 'dialog-center',
+      data: {
+        consulta: this.consulta,
+        tipo: "DERIVACION"
+      }
+    });
   }
 
   solicitarPrueba() {
-
+    this.dialog.open(SolicitarPruebaPopupComponent, {
+      panelClass: 'dialog-center',
+      data: {
+        consulta: this.consulta
+      }
+    });
   }
 
   back() {

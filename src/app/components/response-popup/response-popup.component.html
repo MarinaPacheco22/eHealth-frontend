@@ -1,13 +1,22 @@
 <h1 mat-dialog-title><b>Resolución de consulta</b></h1>
 <div mat-dialog-content>
+  <label for="observacion">Observacion:</label>
+  <textarea type="string" id="observacion" [(ngModel)]="resolucion.observacion" required class="form-control"></textarea>
+
   <label for="diagnostico">Diagnóstico:</label>
-  <textarea type="string" id="diagnostico" [(ngModel)]="resolucion.diagnostico" required class="form-control"></textarea>
+  <textarea type="string" id="diagnostico" [(ngModel)]="resolucion.diagnostico" class="form-control"></textarea>
 
   <label for="tratamiento">Tratamiento:</label>
-  <textarea type="string" id="tratamiento" [(ngModel)]="resolucion.tratamiento" required class="form-control"></textarea>
+  <textarea type="string" id="tratamiento" [(ngModel)]="resolucion.tratamiento" class="form-control"></textarea>
+
+  <label *ngIf="tipoResolucion == 'DERIVACION'">Derivar a:</label>
+  <select *ngIf="tipoResolucion == 'DERIVACION'" id="especialidad" [(ngModel)]="especialidad" class="form-control">
+    <option></option>
+    <option *ngFor="let especialidad of especialidades" [value]="especialidad">{{ especialidad }}</option>
+  </select>
 
   <label for="estado">Estado:</label>
-  <select id="estado" [(ngModel)]="solicitud.estado" class="form-control">
+  <select id="estado" [(ngModel)]="solicitud.estado" required class="form-control">
     <option [defaultSelected]="0" value="0">Solicitud recibida</option>
     <option value="1">Solicitud cerrada</option>
     <option value="2">Solicitud derivada</option>

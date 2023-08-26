@@ -11,38 +11,30 @@ export class MedicosBusquedaFiltradaComponent implements OnInit {
   apellidos: string = '';
   especialidad: string = '';
   activo: string = '';
-  orderBy: string = '';
 
   @Output() searchFiltered = new EventEmitter<any>();
 
   especialidades: string[] = [
-    'Alergología',
-    'Cardiología',
-    'Dermatología',
-    'Endocrinología',
-    'Gastroenterología',
-    'Hematología',
-    'Infectología',
+    'Alergologia',
+    'Cardiologia',
+    'Dermatologia',
+    'Endocrinologia',
+    'Gastroenterologia',
+    'Hematologia',
+    'Infectologia',
     'Medicina familiar',
-    'Neumología',
-    'Neurología',
-    'Oftalmología',
-    'Oncología',
+    'Neumologia',
+    'Neurologia',
+    'Oftalmologia',
+    'Oncologia',
     'Ortopedia',
-    'Otorrinolaringología',
-    'Pediatría',
-    'Psicología',
-    'Psiquiatría',
-    'Radiología',
-    'Reumatología',
-    'Urología'
-  ];
-
-  opcionesOrdenar = [
-    { valor: '', nombre: '' },
-    { valor: 'nombre', nombre: 'Nombre' },
-    { valor: 'apellidos', nombre: 'Apellidos' },
-    { valor: 'especialidad', nombre: 'Especialidad' },
+    'Otorrinolaringologia',
+    'Pediatria',
+    'Psicologia',
+    'Psiquiatria',
+    'Radiologia',
+    'Reumatologia',
+    'Urologia'
   ];
 
   constructor() {}
@@ -56,8 +48,7 @@ export class MedicosBusquedaFiltradaComponent implements OnInit {
       nombre: this.nombre,
       apellidos: this.apellidos,
       especialidad: this.especialidad,
-      activo: this.activo,
-      orderBy: this.orderBy
+      activo: this.activo
     };
     this.searchFiltered.emit(filtros);
   }
@@ -67,7 +58,6 @@ export class MedicosBusquedaFiltradaComponent implements OnInit {
     this.apellidos = '';
     this.especialidad = '';
     this.activo = '';
-    this.orderBy = '';
   }
 
 }

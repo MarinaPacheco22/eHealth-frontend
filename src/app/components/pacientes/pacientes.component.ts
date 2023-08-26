@@ -6,7 +6,6 @@ import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {HistorialClinicoPopupComponent} from "../historial-clinico-popup/historial-clinico-popup.component";
 import {GenericPopupComponent} from "../generic-popup/generic-popup.component";
-import {OrderByPipe} from "../../pipes/orderby.pipe";
 
 @Component({
   selector: 'app-pacientes',
@@ -23,9 +22,12 @@ export class PacientesComponent implements OnInit {
     private pacientesService: PacientesService,
     private rolService: RolService,
     private router: Router,
-    private dialog: MatDialog,
-    private orderByPipe: OrderByPipe
+    private dialog: MatDialog
   ) {
+  }
+
+  ngOnInit(): void {
+    this.getPacientesAsignados();
   }
 
   getPacientesAsignados() {
@@ -56,10 +58,6 @@ export class PacientesComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
-    this.getPacientesAsignados();
-  }
-
   mostrarHistorial(paciente: any) {
     this.dialog.open(HistorialClinicoPopupComponent, {
       panelClass: 'dialog-center',
@@ -78,7 +76,7 @@ export class PacientesComponent implements OnInit {
     if (this.rolService.getUserType() == 'admin') {
       this.pacientesService.getPacientesFiltrados(filters.nombre, filters.apellidos, filters.sexo, filters.fumador).subscribe(
         (response) => {
-          this.pacientesAsignados = this.orderByPipe.transform(response.body, filters.orderBy);
+          this.pacientesAsignados = response.body;
         },
         (error) => {
           console.error(error);
@@ -87,7 +85,7 @@ export class PacientesComponent implements OnInit {
     } else {
       this.pacientesService.getPacientesFiltradosByMedico(filters.nombre, filters.apellidos, filters.sexo, this.rolService.getUserId(), filters.fumador).subscribe(
         (response) => {
-          this.pacientesAsignados = this.orderByPipe.transform(response.body, filters.orderBy);
+          this.pacientesAsignados = response.body;
         },
         (error) => {
           console.error(error);

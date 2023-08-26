@@ -5,8 +5,6 @@ import {MedicosService} from "../../services/medicos.service";
 import {MatDialog} from "@angular/material/dialog";
 import {MedicoDetailsPopupComponent} from "../medico-details-popup/medico-details-popup.component";
 import {ActivatedRoute} from "@angular/router";
-import {OrderByPipe} from "../../pipes/orderby.pipe";
-import {Medico} from "../../model/medico.model";
 
 @Component({
   selector: 'app-medicos',
@@ -24,8 +22,7 @@ export class MedicosComponent implements OnInit {
     private medicosService: MedicosService,
     private rolService: RolService,
     private dialog: MatDialog,
-    private route: ActivatedRoute,
-    private orderByPipe: OrderByPipe
+    private route: ActivatedRoute
   ) {
   }
 
@@ -91,7 +88,7 @@ export class MedicosComponent implements OnInit {
   realizarBusquedaFiltrada(filters: any) {
     this.medicosService.getMedicosFiltrados(filters.nombre, filters.apellidos, filters.especialidad, filters.activo).subscribe(
       (response) => {
-        this.medicos = this.orderByPipe.transform(response.body, filters.orderBy);
+        this.medicos = response.body;
       },
       (error) => {
         console.error(error);

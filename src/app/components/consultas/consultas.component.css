@@ -45,8 +45,30 @@
   position: sticky;
 }
 
+.delete-button {
+  background-color: red;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  margin-right: 20px;
+  border-radius: 10px;
+  position: sticky;
+}
+
 .closed-state {
   background-color: mediumpurple;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  margin-right: 20px;
+  border-radius: 10px;
+  position: sticky;
+}
+
+.refer-state {
+  background-color: yellowgreen;
   color: white;
   padding: 10px 20px;
   border: none;

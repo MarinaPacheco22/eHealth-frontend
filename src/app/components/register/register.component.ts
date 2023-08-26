@@ -17,26 +17,26 @@ export class RegisterComponent implements OnInit {
 
   showNavBar: boolean = false;
   especialidades: string[] = [
-    'Alergología',
-    'Cardiología',
-    'Dermatología',
-    'Endocrinología',
-    'Gastroenterología',
-    'Hematología',
-    'Infectología',
+    'Alergologia',
+    'Cardiologia',
+    'Dermatologia',
+    'Endocrinologia',
+    'Gastroenterologia',
+    'Hematologia',
+    'Infectologia',
     'Medicina familiar',
-    'Neumología',
-    'Neurología',
-    'Oftalmología',
-    'Oncología',
+    'Neumologia',
+    'Neurologia',
+    'Oftalmologia',
+    'Oncologia',
     'Ortopedia',
-    'Otorrinolaringología',
-    'Pediatría',
-    'Psicología',
-    'Psiquiatría',
-    'Radiología',
-    'Reumatología',
-    'Urología'
+    'Otorrinolaringologia',
+    'Pediatria',
+    'Psicologia',
+    'Psiquiatria',
+    'Radiologia',
+    'Reumatologia',
+    'Urologia'
   ];
 
   registerForm: FormGroup;
@@ -163,8 +163,9 @@ export class RegisterComponent implements OnInit {
           console.log("Medico creado con éxito.");
           this.rolService.setUserType("medico");
           this.rolService.setHashPassword(newMedico.contrasena);
-          this.mostrarGenericPopup("Se ha registrado correctamente. Le avisaremos a su correo electrónico cuando el administrador compruebe la información introducida y su cuenta sea activada.")
-          this.router.navigate(['/main']);
+          const dialog = this.mostrarGenericPopup("Se ha registrado correctamente. Le avisaremos a su correo electrónico cuando el administrador compruebe la información introducida y su cuenta sea activada.")
+          dialog.afterClosed().subscribe(() => {this.router.navigate(['/main']);
+          })
         },
         (error) => {
           if(error.status == 409) {
@@ -245,8 +246,8 @@ export class RegisterComponent implements OnInit {
     };
   }
 
-  mostrarGenericPopup(mensaje: string): void {
-    this.dialog.open(GenericPopupComponent, {
+  mostrarGenericPopup(mensaje: string) {
+    return this.dialog.open(GenericPopupComponent, {
       width: '300px',
       data: { message: mensaje }
     });

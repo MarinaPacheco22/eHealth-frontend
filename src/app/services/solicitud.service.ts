@@ -28,7 +28,7 @@ export class SolicitudService {
   }
 
   getSolicitudesAbiertasFiltradasByMedico(id: number, nombre: any, apellidos: any, fecha: any) {
-    const filter = "paciente.nombre:" + nombre + ",paciente.apellidos:" + apellidos + ",fecha:" + fecha + ",medico.id:" + id + ",estado=SOLICITUD_ENVIADA";
+    const filter = "paciente.nombre:" + nombre + ",paciente.apellidos:" + apellidos + ",fecha:" + fecha + ",medico.id:" + id + ",estado:0";
     return this.http.get<any>(this.API_ENDPOINT + "/solicitud-consulta/filter?filter=" + filter, {
       params: undefined,
       observe: "response"
@@ -58,6 +58,20 @@ export class SolicitudService {
 
   changeState(solicitudId: number, estado: number) {
     return this.http.put<any>(this.API_ENDPOINT + "/solicitud-consulta/update-state/" + solicitudId + "/" + estado, {
+      params: undefined,
+      observe: 'response'
+    })
+  }
+
+  derivarSolicitud(solicitudId: number, especialidad: string) {
+    return this.http.put<any>(this.API_ENDPOINT + "/solicitud-consulta/derivar/" + solicitudId + "/" + especialidad, {
+      params: undefined,
+      observe: 'response'
+    })
+  }
+
+  deleteSolicitud(id: number) {
+    return this.http.delete<any>(this.API_ENDPOINT + "/solicitud-consulta/" + id, {
       params: undefined,
       observe: 'response'
     })

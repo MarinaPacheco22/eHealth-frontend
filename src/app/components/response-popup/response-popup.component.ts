@@ -5,7 +5,6 @@ import {GenericPopupComponent} from "../generic-popup/generic-popup.component";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {catchError, throwError} from "rxjs";
 import {Router} from "@angular/router";
-import {LocalDate} from "@js-joda/core";
 import {SolicitudService} from "../../services/solicitud.service";
 
 @Component({
@@ -18,6 +17,31 @@ export class ResponsePopupComponent implements OnInit {
   solicitud: any;
   resolucion: ResolucionConsulta = new ResolucionConsulta();
   modificarHistorialActivo = false;
+  tipoResolucion: string = '';
+  especialidad: string = '';
+
+  especialidades: string[] = [
+    'Alergologia',
+    'Cardiologia',
+    'Dermatologia',
+    'Endocrinologia',
+    'Gastroenterologia',
+    'Hematologia',
+    'Infectologia',
+    'Medicina familiar',
+    'Neumologia',
+    'Neurologia',
+    'Oftalmologia',
+    'Oncologia',
+    'Ortopedia',
+    'Otorrinolaringologia',
+    'Pediatria',
+    'Psicologia',
+    'Psiquiatria',
+    'Radiologia',
+    'Reumatologia',
+    'Urologia'
+  ];
 
   constructor(public dialogRef: MatDialogRef<ResponsePopupComponent>,
               private resolucionConsultaService: ResolucionConsultaService,
@@ -25,7 +49,8 @@ export class ResponsePopupComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) public data: any,
               private dialog: MatDialog,
               private router: Router) {
-    this.solicitud = data;
+    this.solicitud = data.consulta;
+    this.tipoResolucion = data.tipo;
   }
 
   ngOnInit(): void {
@@ -36,7 +61,7 @@ export class ResponsePopupComponent implements OnInit {
       case 'SOLICITUD_CERRADA':
         this.solicitud.estado = '1';
         break;
-      case 'DERIVACIÓN':
+      case 'DERIVACION':
         this.solicitud.estado = '2';
         break;
     }
@@ -44,8 +69,8 @@ export class ResponsePopupComponent implements OnInit {
   }
 
   enviar() {
-    if (this.resolucion.diagnostico == undefined || this.resolucion.tratamiento == undefined) {
-      this.mostrarErrorPopup("Campos incompletos.")
+    if (this.resolucion.observacion == undefined) {
+      this.mostrarErrorPopup("Campos incompletos")
     } else {
       this.resolucion.solicitudConsultaId = this.solicitud.id;
       this.resolucion.pacienteId = this.solicitud.pacienteOutDto.id;
@@ -66,6 +91,18 @@ export class ResponsePopupComponent implements OnInit {
               )
             )
             .subscribe(() => {
+              if (this.tipoResolucion == 'DERIVACION') {
+                this.solicitudService.derivarSolicitud(this.solicitud.id, this.especialidad)
+                  .pipe(
+                    catchError((error) => {
+                      alert(error.error);
+                      return throwError(error);
+                    })
+                  )
+                  .subscribe(() => {
+                    console.log("Solicitud derivada.")
+                  })
+              }
               this.mostrarGenericPopup("Respuesta enviada correctamente.");
               this.dialogRef.close();
             })

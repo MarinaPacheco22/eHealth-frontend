@@ -35,8 +35,11 @@ import { ConsultasBusquedaFiltradaComponent } from './components/consultas-busqu
 import { MedicosBusquedaFiltradaComponent } from './components/medicos-busqueda-filtrada/medicos-busqueda-filtrada.component';
 import { PacientesBusquedaFiltradaComponent } from './components/pacientes-busqueda-filtrada/pacientes-busqueda-filtrada.component';
 import { SolicitudDetailsComponent } from './components/solicitud-details/solicitud-details.component';
-import {OrderByPipe} from "./pipes/orderby.pipe";
 import { ResponsePopupComponent } from './components/response-popup/response-popup.component';
+import { SolicitarPruebaPopupComponent } from './components/solicitar-prueba-popup/solicitar-prueba-popup.component';
+import { PruebasComponent } from './components/pruebas/pruebas.component';
+import { AddResultsPopupComponent } from './components/add-results-popup/add-results-popup.component';
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -64,8 +67,10 @@ import { ResponsePopupComponent } from './components/response-popup/response-pop
     MedicosBusquedaFiltradaComponent,
     PacientesBusquedaFiltradaComponent,
     SolicitudDetailsComponent,
-    OrderByPipe,
-    ResponsePopupComponent
+    ResponsePopupComponent,
+    SolicitarPruebaPopupComponent,
+    PruebasComponent,
+    AddResultsPopupComponent
   ],
   imports: [
     BrowserModule,
@@ -76,9 +81,10 @@ import { ResponsePopupComponent } from './components/response-popup/response-pop
     MatDialogModule,
     MatButtonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatIconModule
   ],
-  providers: [KeycloakService, OrderByPipe],
+  providers: [KeycloakService, Clipboard],
   entryComponents: [GenericPopupComponent, ConfirmationPopupComponent],
   bootstrap: [AppComponent]
 })

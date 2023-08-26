@@ -16,26 +16,26 @@ export class ConsultasBusquedaFiltradaComponent implements OnInit {
   user_type: string;
   @Output() searchFiltered = new EventEmitter<any>();
   especialidades: string[] = [
-    'Alergología',
-    'Cardiología',
-    'Dermatología',
-    'Endocrinología',
-    'Gastroenterología',
-    'Hematología',
-    'Infectología',
+    'Alergologia',
+    'Cardiologia',
+    'Dermatologia',
+    'Endocrinologia',
+    'Gastroenterologia',
+    'Hematologia',
+    'Infectologia',
     'Medicina familiar',
-    'Neumología',
-    'Neurología',
-    'Oftalmología',
-    'Oncología',
+    'Neumologia',
+    'Neurologia',
+    'Oftalmologia',
+    'Oncologia',
     'Ortopedia',
-    'Otorrinolaringología',
-    'Pediatría',
-    'Psicología',
-    'Psiquiatría',
-    'Radiología',
-    'Reumatología',
-    'Urología'
+    'Otorrinolaringologia',
+    'Pediatria',
+    'Psicologia',
+    'Psiquiatria',
+    'Radiologia',
+    'Reumatologia',
+    'Urologia'
   ];
 
   constructor(public rolService: RolService) { }

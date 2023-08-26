@@ -1,9 +1,9 @@
-import {LocalDate} from "@js-joda/core";
 
 export class ResolucionConsulta {
 
   constructor(
     public id ?: number,
+    public observacion ?: string,
     public diagnostico ?: string,
     public tratamiento ?: string,
     public medicacion ?: string,

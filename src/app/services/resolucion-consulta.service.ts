@@ -20,4 +20,11 @@ export class ResolucionConsultaService {
       observe: 'response'
     });
   }
+
+  getResolucionByConsultaId(id: number) {
+    return this.http.get<any>(this.API_ENDPOINT + '/resolucion-consulta/by-consulta/' + id, {
+      params: undefined,
+      observe: 'response'
+    });
+  }
 }

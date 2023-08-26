@@ -1,12 +1,34 @@
-<h1 mat-dialog-title>Detalles de la solicitud</h1>
+<h1 mat-dialog-title><b>Detalles de la solicitud</b></h1>
 <div mat-dialog-content>
   <p><strong>Fecha: </strong> <span id="fecha">{{consulta.fecha.dayOfMonth}}-{{consulta.fecha.monthValue}}-{{consulta.fecha.year}}</span></p>
   <p><strong>Medico asignado: </strong> <span id="medico">{{consulta.medicoOutDto.nombre}} {{consulta.medicoOutDto.apellidos}}</span></p>
   <p><strong>Descripcion: </strong> <span id="descripcion">{{consulta.descripcion}}</span></p>
   <p><strong>Estado: </strong> <span id="estado">{{consulta.estado}}</span></p>
+  <p *ngIf="isRefered"><strong>Derivación a: </strong> <span id="derivacion">{{ consulta.medicoOutDto.especialidad }}</span></p>
+
+  <p *ngIf="showResolution" style="margin-top: 50px;"></p>
+
+  <h1 mat-dialog-title *ngIf="showResolution"><b>Resolución: </b></h1>
+  <h1 mat-dialog-title *ngIf="showMoreInformation"><b>Más información: </b></h1>
+
+  <p *ngIf="showResolution || showMoreInformation">
+    <strong>Observación: </strong> <span id="observacion">{{resolucion.observacion}}</span>
+  </p>
+  <p *ngIf="(showResolution || showMoreInformation) && resolucion.diagnostico != null && resolucion.diagnostico != ''">
+    <strong>Diagnóstico: </strong> <span id="diagnostico">{{resolucion.diagnostico}}</span>
+  </p>
+  <p *ngIf="(showResolution || showMoreInformation) && resolucion.tratamiento != null && resolucion.tratamiento != ''">
+    <strong>Tratamiento: </strong> <span id="tratamiento">{{resolucion.tratamiento}}</span>
+  </p>
 </div>
 <div mat-dialog-actions class="button-container">
-  <a *ngIf="anyArchivo" class="navf button"
+  <button mat-raised-button color="accent" *ngIf="isClosed" (click)="verResolucion()">
+    {{ showResolution ? 'Ocultar resolución' : 'Ver resolución' }}
+  </button>
+  <button mat-raised-button color="accent" *ngIf="isRefered" (click)="verObservaciones()">
+    {{ showMoreInformation ? 'Ocultar información' : 'Ver más información' }}
+  </button>
+  <a *ngIf="anyArchivo" mat-raised-button color="primary"
      [routerLink]="['archivos', consulta.id]"
      target="_blank">Ver Imágenes/Videos</a>
   <button mat-button mat-dialog-close="">Cerrar</button>

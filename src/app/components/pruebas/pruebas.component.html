@@ -1,0 +1,58 @@
+<head>
+  <title>Consultas</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous" />
+</head>
+<ng-container *ngIf="showNavBar">
+  <app-navbar></app-navbar>
+</ng-container>
+<!--<div class="row">-->
+<!--  <div class="col-md-12">-->
+<!--    <app-consultas-busqueda-filtrada (searchFiltered)="realizarBusquedaFiltrada($event)"></app-consultas-busqueda-filtrada>-->
+<!--  </div>-->
+<!--</div>-->
+<div class="row">
+  <div class="col-md-12">
+    <div id="table-container" *ngIf="pruebas; else noData">
+      <table id="medicos-table" class="table table-hover">
+        <thead>
+        <tr>
+          <th></th>
+          <th class="text-center">Fecha</th>
+          <th class="text-center">Hora</th>
+          <th class="text-center">Consulta</th>
+          <th class="text-center" *ngIf="user_type == 'paciente'">Medico Asignado</th>
+          <th class="text-center" *ngIf="user_type == 'medico'">Paciente</th>
+          <th class="text-center" *ngIf="user_type == 'medico'">Prueba</th>
+          <th class="text-center" *ngIf="user_type == 'paciente'">Tipo de consulta</th>
+          <th class="text-center" *ngIf="user_type == 'paciente'">Estado de la consulta</th>
+          <th class="text-center"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let prueba of pruebas">
+          <td></td>
+          <td  class="text-center">{{prueba.fechaHoraCita.dayOfMonth}}-{{prueba.fechaHoraCita.monthValue}}-{{prueba.fechaHoraCita.year}}</td>
+          <td  class="text-center">{{prueba.fechaHoraCita.hour}}:{{prueba.fechaHoraCita.minute}}</td>
+          <td  class="text-center">{{prueba.consulta}}</td>
+          <td  class="text-center" *ngIf="user_type == 'paciente'">{{ prueba.medicoOutDto.nombre }} {{ prueba.medicoOutDto.apellidos}}</td>
+          <td  class="text-center" *ngIf="user_type == 'medico'">{{ prueba.pacienteOutDto.nombre }} {{ prueba.pacienteOutDto.apellidos}}</td>
+          <td  class="text-center">{{ prueba.prueba }}</td>
+          <td  class="text-center" *ngIf="user_type == 'paciente'">{{ prueba.medicoOutDto.especialidad }}</td>
+          <td  class="text-center" *ngIf="user_type == 'paciente'">{{ prueba.estado }}</td>
+          <td class="text-center">
+            <button class="add-results-button" *ngIf="user_type == 'medico'" (click)="addResults(prueba)"> Añadir resultados
+            </button>
+            <button class="add-results-button" *ngIf="user_type == 'paciente' && prueba.resultadosUrl != null" (click)="verResultados(prueba)"> Ver resultados
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<ng-template class="message-container" #noData>
+  <p class="message" >{{ noDataMessage }}</p>
+</ng-template>

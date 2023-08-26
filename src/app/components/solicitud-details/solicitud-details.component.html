@@ -29,19 +29,19 @@
       <span id="fumadorNo" *ngIf="!consulta.pacienteOutDto.fumador">No</span>
     </p>
     <p><strong>Alergias: </strong>
-      <span id="alergiasSi" *ngIf="consulta.pacienteOutDto.alergias.length != 0">{{consulta.pacienteOutDto.alergias}}</span>
+      <span id="alergiasSi" *ngIf="consulta.pacienteOutDto.alergias.length != 0">{{consulta.pacienteOutDto.alergias.join(', ')}}</span>
       <span id="alergiasNo" *ngIf="consulta.pacienteOutDto.alergias.length == 0">Ninguna</span>
     </p>
     <p><strong>Enfermedades diagnosticadas: </strong>
-      <span id="enfermedadesSi" *ngIf="consulta.pacienteOutDto.enfermedadesDiagnosticadas.length != 0">{{consulta.pacienteOutDto.enfermedadesDiagnosticadas}}</span>
+      <span id="enfermedadesSi" *ngIf="consulta.pacienteOutDto.enfermedadesDiagnosticadas.length != 0">{{consulta.pacienteOutDto.enfermedadesDiagnosticadas.join(', ')}}</span>
       <span id="enfermedadesNo" *ngIf="consulta.pacienteOutDto.enfermedadesDiagnosticadas.length == 0">Ninguna</span>
     </p>
     <p><strong>Intervenciones: </strong>
-      <span id="intervencionesSi" *ngIf="consulta.pacienteOutDto.intervenciones.length != 0">{{consulta.pacienteOutDto.intervenciones}}</span>
+      <span id="intervencionesSi" *ngIf="consulta.pacienteOutDto.intervenciones.length != 0">{{consulta.pacienteOutDto.intervenciones.join(', ')}}</span>
       <span id="intervencionesNo" *ngIf="consulta.pacienteOutDto.intervenciones.length == 0">Ninguna</span>
     </p>
     <p><strong>Medicación actual: </strong>
-      <span id="medicacionSi" *ngIf="consulta.pacienteOutDto.medicacionActual.length != 0">{{consulta.pacienteOutDto.medicacionActual}}</span>
+      <span id="medicacionSi" *ngIf="consulta.pacienteOutDto.medicacionActual.length != 0">{{consulta.pacienteOutDto.medicacionActual.join(', ')}}</span>
       <span id="medicacionNo" *ngIf="consulta.pacienteOutDto.medicacionActual.length == 0">Ninguna</span>
     </p>
   </div>
@@ -54,9 +54,21 @@
   <div class="archivos" *ngIf="anyArchivo">
     <p><strong>Archivos:</strong></p>
   </div>
+
   <div mat-dialog-actions class="button-container">
-    <div *ngFor="let image of images">
+    <div *ngFor="let image of files">
       <img id="myimage" [src]='image'/>
     </div>
   </div>
+
+  <div class="pruebas" *ngIf="consulta.pruebasBoolean">
+    <h3>Pruebas:</h3>
+    <div *ngFor="let prueba of pruebas" class="prueba-item">
+      <p><strong>Prueba:</strong> {{ prueba.prueba }}</p>
+      <p><strong>Fecha y Hora de la Cita: </strong> {{ prueba.fechaHoraCita.dayOfMonth }}-{{ prueba.fechaHoraCita.monthValue }}-{{ prueba.fechaHoraCita.year }} {{ prueba.fechaHoraCita.hour }}:{{ prueba.fechaHoraCita.minute}} </p>
+      <p *ngIf="prueba.resultadosUrl != null"><strong>URL de Resultados: </strong>
+        <a [href]="prueba.resultadosUrl" target="_blank">{{ prueba.resultadosUrl }}</a></p>
+    </div>
+  </div>
+
 </div>

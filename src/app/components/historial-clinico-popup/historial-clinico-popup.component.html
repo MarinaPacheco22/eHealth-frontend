@@ -3,19 +3,19 @@
   <p><strong>Altura: </strong> <span id="altura">{{paciente.altura}}</span></p>
   <p><strong>Peso: </strong> <span id="peso">{{paciente.peso}}</span></p>
   <p><strong>Alergias: </strong>
-    <span id="alergiasSi" *ngIf="historialClinico.alergias.length != 0">{{historialClinico.alergias}}</span>
+    <span id="alergiasSi" *ngIf="historialClinico.alergias.length != 0">{{historialClinico.alergias.join(', ')}}</span>
     <span id="alergiasNo" *ngIf="historialClinico.alergias.length == 0">Ninguna</span>
   </p>
   <p><strong>Enfermedades diagnosticadas: </strong>
-    <span id="enfermedadesSi" *ngIf="historialClinico.enfermedadesDiagnosticadas.length != 0">{{historialClinico.enfermedadesDiagnosticadas}}</span>
+    <span id="enfermedadesSi" *ngIf="historialClinico.enfermedadesDiagnosticadas.length != 0">{{historialClinico.enfermedadesDiagnosticadas.join(', ')}}</span>
     <span id="enfermedadesNo" *ngIf="historialClinico.enfermedadesDiagnosticadas.length == 0">Ninguna</span>
   </p>
   <p><strong>Intervenciones: </strong>
-    <span id="intervencionesSi" *ngIf="historialClinico.intervenciones.length != 0">{{historialClinico.intervenciones}}</span>
+    <span id="intervencionesSi" *ngIf="historialClinico.intervenciones.length != 0">{{historialClinico.intervenciones.join(', ')}}</span>
     <span id="intervencionesNo" *ngIf="historialClinico.intervenciones.length == 0">Ninguna</span>
   </p>
   <p><strong>Medicación actual: </strong>
-    <span id="medicacionSi" *ngIf="historialClinico.medicacionActual.length != 0">{{historialClinico.medicacionActual}}</span>
+    <span id="medicacionSi" *ngIf="historialClinico.medicacionActual.length != 0">{{historialClinico.medicacionActual.join(', ')}}</span>
     <span id="medicacionNo" *ngIf="historialClinico.medicacionActual.length == 0">Ninguna</span>
   </p>
 </div>

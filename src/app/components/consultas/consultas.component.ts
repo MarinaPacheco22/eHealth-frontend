@@ -2,9 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {SolicitudService} from "../../services/solicitud.service";
 import {RolService} from "../../services/rol.service";
 import {catchError, throwError} from "rxjs";
-import {NavigationEnd, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {SolicitudDetailsPopupComponent} from "../solicitud-details-popup/solicitud-details-popup.component";
 import {MatDialog} from "@angular/material/dialog";
+import {ConfirmationPopupComponent} from "../confirmation-popup/confirmation-popup.component";
+import {GenericPopupComponent} from "../generic-popup/generic-popup.component";
 
 @Component({
   selector: 'app-consultas',
@@ -28,7 +30,6 @@ export class ConsultasComponent implements OnInit {
   ngOnInit(): void {
     this.user_id = Number(this.rolService.getUserId());
     this.user_type = this.rolService.getUserType();
-    console.log(this.user_type);
     if (this.user_type == 'paciente') {
       this.solicitudService.getSolicitudesByPaciente(this.user_id)
         .pipe(
@@ -54,7 +55,6 @@ export class ConsultasComponent implements OnInit {
           }
           this.consultas.push(solicitud);
         })
-        console.log(this.consultas);
       });
     } else {
       this.solicitudService.getSolicitudesByMedico(this.user_id)
@@ -65,6 +65,7 @@ export class ConsultasComponent implements OnInit {
           })
         ).subscribe((response) => {
         this.consultas = [];
+        console.log(response.body);
         response.body.forEach((solicitud: any) => {
           solicitud.fecha.monthValue = this.format(solicitud.fecha.monthValue);
           solicitud.fecha.dayOfMonth = this.format(solicitud.fecha.dayOfMonth);
@@ -81,7 +82,6 @@ export class ConsultasComponent implements OnInit {
           }
           this.consultas.push(solicitud);
         })
-        console.log(this.consultas);
       });
     }
   }
@@ -108,6 +108,7 @@ export class ConsultasComponent implements OnInit {
 
   realizarBusquedaFiltrada(filters: any) {
     if (this.user_type == 'paciente') {
+      console.log(filters.estado);
       this.solicitudService.getSolicitudesFiltradasByPaciente(this.user_id, filters.estado, filters.especialidad, filters.fecha).subscribe(
         (response) => {
           if (response.body != null) {
@@ -173,7 +174,32 @@ export class ConsultasComponent implements OnInit {
     }
   }
 
-  verResolucion(consulta: any) {
+  eliminarSolicitud(solicitud: any) {
+    const dialogRef = this.mostrarConfirmationPopup("eliminar esta solicitud");
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.solicitudService.deleteSolicitud(solicitud.id).subscribe(() => {
+          this.mostrarGenericPopup("Solicitud eliminada correctamente.");
+        })
+      }
+    })
+  }
 
+  mostrarConfirmationPopup(mensaje: string) {
+    return this.dialog.open(ConfirmationPopupComponent, {
+      width: '300px',
+      data: {message: mensaje}
+    });
+  }
+
+  mostrarGenericPopup(mensaje: string): void {
+    const dialogRef = this.dialog.open(GenericPopupComponent, {
+      width: '300px',
+      data: {message: mensaje}
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      location.reload();
+    })
   }
 }

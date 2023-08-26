@@ -1,0 +1,37 @@
+.mat-dialog-content {
+  padding: 30px;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+.mat-dialog-content label {
+  margin-bottom: 10px;
+}
+
+.mat-dialog-content input {
+  margin-bottom: 15px;
+}
+
+.mat-dialog-content .mat-dialog-actions {
+  margin-top: 20px;
+}
+
+.paste-button {
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  margin-right: 20px;
+  border-radius: 10px;
+  position: sticky;
+}
+
+.add-button {
+  background-color: blueviolet;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  margin-right: 20px;
+  border-radius: 10px;
+  position: sticky;
+}

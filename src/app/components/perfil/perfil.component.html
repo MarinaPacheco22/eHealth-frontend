@@ -73,25 +73,25 @@
 
           <div class="info-item">
             <label class="font-weight-bold">Alergias:</label>
-            <span [ngClass]="{ 'd-none': isEditing }" id="alergiasSi" *ngIf="historialClinico.alergias.length != 0">{{ historialClinico.alergias }}</span>
+            <span [ngClass]="{ 'd-none': isEditing }" id="alergiasSi" *ngIf="historialClinico.alergias.length != 0">{{ historialClinico.alergias.join(', ') }}</span>
             <span [ngClass]="{ 'd-none': isEditing }" id="alergiasNo" *ngIf="historialClinico.alergias.length == 0">Ninguna</span>
             <input type="text" [ngClass]="{ 'd-none': !isEditing }" id="inputAlergias" class="form-control" [(ngModel)]="historialClinico.alergias">
           </div>
           <div class="info-item">
             <label class="font-weight-bold">Enfermedades Diagnosticadas:</label>
-            <span [ngClass]="{ 'd-none': isEditing }" id="enfermedadesSi" *ngIf="historialClinico.enfermedadesDiagnosticadas.length != 0">{{ historialClinico.enfermedadesDiagnosticadas }}</span>
+            <span [ngClass]="{ 'd-none': isEditing }" id="enfermedadesSi" *ngIf="historialClinico.enfermedadesDiagnosticadas.length != 0">{{ historialClinico.enfermedadesDiagnosticadas.join(', ') }}</span>
             <span [ngClass]="{ 'd-none': isEditing }" id="enfermedadesNo" *ngIf="historialClinico.enfermedadesDiagnosticadas.length == 0">Ninguna</span>
             <input type="text" [ngClass]="{ 'd-none': !isEditing }" id="inputEnfermedades" class="form-control" [(ngModel)]="historialClinico.enfermedadesDiagnosticadas">
           </div>
           <div class="info-item">
             <label class="font-weight-bold">Medicación Actual:</label>
-            <span [ngClass]="{ 'd-none': isEditing }" id="medicacionSi" *ngIf="historialClinico.medicacionActual.length != 0">{{ historialClinico.medicacionActual }}</span>
+            <span [ngClass]="{ 'd-none': isEditing }" id="medicacionSi" *ngIf="historialClinico.medicacionActual.length != 0">{{ historialClinico.medicacionActual.join(', ') }}</span>
             <span [ngClass]="{ 'd-none': isEditing }" id="medicacionNo" *ngIf="historialClinico.medicacionActual.length == 0">Ninguna</span>
             <input type="text" [ngClass]="{ 'd-none': !isEditing }" id="inputMedicacion" class="form-control" [(ngModel)]="historialClinico.medicacionActual">
           </div>
           <div class="info-item">
             <label class="font-weight-bold">Intervenciones:</label>
-            <span [ngClass]="{ 'd-none': isEditing }" id="intervencionesSi" *ngIf="historialClinico.intervenciones.length != 0">{{ historialClinico.intervenciones }}</span>
+            <span [ngClass]="{ 'd-none': isEditing }" id="intervencionesSi" *ngIf="historialClinico.intervenciones.length != 0">{{ historialClinico.intervenciones.join(', ') }}</span>
             <span [ngClass]="{ 'd-none': isEditing }" id="intervencionesNo" *ngIf="historialClinico.intervenciones.length == 0">Ninguna</span>
             <input type="text" [ngClass]="{ 'd-none': !isEditing }" id="inputIntervenciones" class="form-control" [(ngModel)]="historialClinico.intervenciones">
           </div>

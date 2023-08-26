@@ -1,0 +1,47 @@
+select {
+  display: block;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+label {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+input {
+  margin-bottom: 10px;
+}
+
+.form-check {
+  width: fit-content;
+  white-space: nowrap;
+}
+
+.ml-3 {
+  justify-content: right;
+  margin-left: 20px;
+}
+
+.custom-input {
+  width: 150%;
+  height: 150%;
+
+}
+
+.add-button {
+  background-color: green;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 10px;
+  margin-left: 20px;
+  border-radius: 10px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+}

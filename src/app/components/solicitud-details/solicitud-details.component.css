@@ -79,3 +79,10 @@ h2, h3 {
   cursor: pointer;
   margin-top: 20px;
 }
+
+.prueba-item {
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+

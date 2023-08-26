@@ -104,6 +104,7 @@ export class LoginComponent implements OnInit {
   }
 
   back() {
+    this.dialogRef.close();
     this.router.navigate(['/main']);
   }
 

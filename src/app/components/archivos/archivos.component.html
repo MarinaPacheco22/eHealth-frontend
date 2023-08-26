@@ -1,6 +1,6 @@
 <div *ngFor="let file of files">
   <ng-container *ngIf="isImage(file)">
-    <img [src]="file" width="320" height="240" />
+    <img [src]="file"/>
   </ng-container>
   <ng-container *ngIf="isVideo(file)">
     <video width="90%" height="90%" controls>
