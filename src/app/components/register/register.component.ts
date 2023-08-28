@@ -134,9 +134,9 @@ export class RegisterComponent implements OnInit {
         (response) => {
           console.log("Paciente creado con éxito.");
           this.rolService.setUserType("paciente");
-          this.rolService.setUserId(response.body.id);
+          this.rolService.setUserId(response.body);
           this.rolService.setHashPassword(newPaciente.contrasena);
-          this.router.navigate(['/base']);
+          this.router.navigate(['/consultas']);
         },
         (error) => {
           if(error.status == 409) {

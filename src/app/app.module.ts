@@ -15,7 +15,6 @@ import { MainComponent } from './components/main/main.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { BaseComponent } from './components/base/base.component';
 import { PacientesComponent } from './components/pacientes/pacientes.component';
 import { LoginComponent } from './components/login/login.component';
 import { MedicosComponent } from './components/medicos/medicos.component';
@@ -47,7 +46,6 @@ import {MatIconModule} from "@angular/material/icon";
     RegisterComponent,
     AdminComponent,
     NavbarComponent,
-    BaseComponent,
     PacientesComponent,
     LoginComponent,
     MedicosComponent,

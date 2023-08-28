@@ -8,7 +8,7 @@
       <li class="nav-item" *ngIf="getUserType()=='medico'" [class.active]="isActive('/consultas')">
         <a class="nav-link" routerLink="/consultas" routerLinkActive="active">Mensajes</a>
       </li>
-      <li class="nav-item" [class.active]="isActive('/pruebas')">
+      <li class="nav-item" *ngIf="getUserType()=='paciente' || getUserType()=='medico'" [class.active]="isActive('/pruebas')">
         <a class="nav-link" routerLink="/pruebas" routerLinkActive="active">Pruebas</a>
       </li>
       <li class="nav-item" *ngIf="getUserType()=='admin'" [class.active]="isActive('/medicos')">
