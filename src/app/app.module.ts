@@ -10,7 +10,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { KeycloakService } from './services/keycloak.service';
 
 import { MainComponent } from './components/main/main.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -84,7 +83,7 @@ import {MatIconModule} from "@angular/material/icon";
     ReactiveFormsModule,
     MatIconModule
   ],
-  providers: [KeycloakService, Clipboard],
+  providers: [Clipboard],
   entryComponents: [GenericPopupComponent, ConfirmationPopupComponent],
   bootstrap: [AppComponent]
 })
